@@ -21,13 +21,13 @@ public class UserController implements UserControllerDocs {
         return null;
     }
 
-    @GetMapping("/{accountId}")
-    public UserInfoResponse getUserInfo(@PathVariable Long userId) {
+    @GetMapping("/{userId}")
+    public UserInfoResponse getUserInfo(@PathVariable String userId) {
         return null;
     }
 
-    @PutMapping("/{accountId}")
-    public UserInfoResponse updateUserInfo(@PathVariable Long accountId,
+    @PutMapping("/{userId}")
+    public UserInfoResponse updateUserInfo(@PathVariable String userId,
                                                  @RequestBody UserUpdateRequest request) {
         return null;
     }
