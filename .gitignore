@@ -21,3 +21,13 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore editor and IDE config folders
+.vscode/
+.idea/
+
+# Ignore dependencies folder
+front/node_modules/
+
+# Ignore build output folder
+target/
