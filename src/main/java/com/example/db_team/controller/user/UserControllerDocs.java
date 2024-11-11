@@ -1,6 +1,8 @@
 package com.example.db_team.controller.user;
 
+import com.example.db_team.controller.ListWrapper;
 import com.example.db_team.controller.user.dto.UserIdResponse;
+import com.example.db_team.controller.user.dto.UserInfoResponse;
 import com.example.db_team.controller.user.dto.UserRegisterRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -16,4 +18,9 @@ public interface UserControllerDocs {
             @Schema(description = "시용자 등록 정보", implementation = UserRegisterRequest.class)
             UserRegisterRequest accountRegisterRequest
     );
+
+    @Operation(summary = "사용자들의 정보 리스트 조회", description = "사용자들의 정보를 리스트의 형태로 조회한다.")
+    @ApiResponse(responseCode = "200", description = "사용자들의 정보 조회 성공", useReturnTypeSchema = true)
+    @ApiResponse(responseCode = "400", description = "사용자들의 정보 조회 실패")
+    ListWrapper<UserInfoResponse> getUserList();
 }
