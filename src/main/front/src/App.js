@@ -12,51 +12,51 @@ import reviewIcon from './assets/review_icon.svg';
 import profileIcon from './assets/profile_icon.svg';
 
 const App = () => {
-  return (
-    <Router>
-      <Container>
-        <Header>
-          <TopBar>
-            <StyledLink to="/signup">회원가입</StyledLink>
-            <StyledLink to="/login">로그인</StyledLink>
-          </TopBar>
-        </Header>
+    return (
+        <Router>
+            <Container>
+                <Header>
+                    <TopBar>
+                        <StyledLink to="/signup">회원가입</StyledLink>
+                        <StyledLink to="/login">로그인</StyledLink>
+                    </TopBar>
+                </Header>
 
-        <Footer>
-          <NavBar>
-            <NavItem>
-              <NavLink to="/">
-                <NavIcon src={homeIcon} alt="홈 아이콘" />
-                <NavText>홈</NavText>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/reviews">
-                <NavIcon src={reviewIcon} alt="리뷰 아이콘" />
-                <NavText>내 리뷰</NavText>
-              </NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink to="/info">
-                <NavIcon src={profileIcon} alt="프로필 아이콘" />
-                <NavText>내 정보</NavText>
-              </NavLink>
-            </NavItem>
-          </NavBar>
-        </Footer>
+                <Footer>
+                    <NavBar>
+                        <NavItem>
+                            <NavLink to="/">
+                                <NavIcon src={homeIcon} alt="홈 아이콘" />
+                                <NavText>홈</NavText>
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink to="/reviews">
+                                <NavIcon src={reviewIcon} alt="리뷰 아이콘" />
+                                <NavText>내 리뷰</NavText>
+                            </NavLink>
+                        </NavItem>
+                        <NavItem>
+                            <NavLink to="/info">
+                                <NavIcon src={profileIcon} alt="프로필 아이콘" />
+                                <NavText>내 정보</NavText>
+                            </NavLink>
+                        </NavItem>
+                    </NavBar>
+                </Footer>
 
-        {/* 라우터 설정 */}
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/reviews" element={<MyReviews />} />
-          <Route path="/info" element={<MyInfo />} />
-          <Route path="/search" element={<Search />} />
-        </Routes>
-      </Container>
-    </Router>
-  );
+                {/* 라우터 설정 */}
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/reviews" element={<MyReviews />} />
+                    <Route path="/info" element={<MyInfo />} />
+                    <Route path="/search" element={<Search />} />
+                </Routes>
+            </Container>
+        </Router>
+    );
 };
 
 export default App;
