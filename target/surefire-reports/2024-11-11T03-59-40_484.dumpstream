@@ -1,0 +1,5 @@
+# Created at 2024-11-11T03:59:41.263
+Boot Manifest-JAR contains absolute paths in classpath 'D:\WineProject\DB_TP_2024\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+
