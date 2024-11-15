@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import MyReviews from './pages/MyReviews';
 import Search from './pages/Search';
 import MyInfo from './pages/MyInfo';
+import WineInfo from './pages/WineInfo';
 import homeIcon from './assets/home_icon.svg';
 import reviewIcon from './assets/review_icon.svg';
 import profileIcon from './assets/profile_icon.svg';
@@ -50,6 +51,7 @@ const App = () => {
           <Route path="/reviews" element={<MyReviews />} />
           <Route path="/info" element={<MyInfo />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/wine-info/:wineName" element={<WineInfo />} />
         </Routes>
       </Container>
     </Router>
