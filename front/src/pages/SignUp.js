@@ -9,11 +9,12 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [phone, setPhone] = useState('');
   const [name, setName] = useState('');
+  const [id, setId] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-  
+
     // 비밀번호와 비밀번호 재확인 일치 여부 확인
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
@@ -29,7 +30,7 @@ const SignUp = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password: encryptedPassword, phone, name }), // 암호화된 비밀번호 전송
+        body: JSON.stringify({ name, phone, email, id, password: encryptedPassword }), // 암호화된 비밀번호 전송
       });
 
       if (response.ok) {
@@ -39,7 +40,7 @@ const SignUp = () => {
         navigate('/login');
       } else {
         const errorMessage = await response.text();
-        
+
         if (response.status === 409) { // 중복 에러 발생 시
           alert(errorMessage); // "이미 존재하는 이메일입니다." 또는 "이미 존재하는 전화번호입니다."
         } else {
@@ -65,10 +66,24 @@ const SignUp = () => {
           required
         />
         <Input
+          type="tel"
+          placeholder="전화번호"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+          required
+        />
+        <Input
           type="email"
           placeholder="이메일"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          type="id"
+          placeholder="아이디"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
           required
         />
         <Input
@@ -83,13 +98,6 @@ const SignUp = () => {
           placeholder="비밀번호 재확인"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <Input
-          type="tel"
-          placeholder="전화번호"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
           required
         />
         <Button type="submit">회원가입</Button>
