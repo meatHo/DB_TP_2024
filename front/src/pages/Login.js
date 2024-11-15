@@ -5,7 +5,7 @@ import CryptoJS from 'crypto-js';
 import axios from 'axios';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [id, setId] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ const Login = () => {
     try {
       const response = await axios.post(
         'http://localhost:8080/api/login',
-        { email, password: encryptedPassword }, // 암호화된 비밀번호 전송
+        { id, password: encryptedPassword }, // 암호화된 비밀번호 전송
         { withCredentials: true } // 쿠키 포함
       );
 
@@ -40,10 +40,10 @@ const Login = () => {
       <h2>로그인</h2>
       <Form onSubmit={handleLogin}>
         <Input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          type="id"
+          placeholder="아이디"
+          value={id}
+          onChange={(e) => setId(e.target.value)}
           required
         />
         <Input
@@ -57,7 +57,7 @@ const Login = () => {
       </Form>
     </LoginContainer>
   );
-}; 
+};
 
 /* 
   //테스트 코드   
@@ -72,6 +72,7 @@ const Login = () => {
       name: '홍길동',
       phone: '010-1234-5678',
       email: 'user@example.com',
+      id: 'loapp'
     }));
     alert('로그인 성공!');
     navigate('/'); // 홈 페이지로 이동
