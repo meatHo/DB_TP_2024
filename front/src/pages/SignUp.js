@@ -31,6 +31,7 @@ const SignUp = () => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ userName, phoneNumber, email, loginId, password: encryptedPassword }), // 암호화된 비밀번호 전송
+
       });
 
       if (response.ok) {
@@ -55,54 +56,54 @@ const SignUp = () => {
   };
 
   return (
-    <SignUpContainer>
-      <h2>회원가입</h2>
-      <Form onSubmit={handleSignUp}>
-        <Input
-          type="text"
-          placeholder="이름"
-          value={userName}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <Input
-          type="tel"
-          placeholder="전화번호"
-          value={phoneNumber}
-          onChange={(e) => setPhone(e.target.value)}
-          required
-        />
-        <Input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <Input
-          type="id"
-          placeholder="아이디"
-          value={loginId}
-          onChange={(e) => setId(e.target.value)}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <Input
-          type="password"
-          placeholder="비밀번호 재확인"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <Button type="submit">회원가입</Button>
-      </Form>
-    </SignUpContainer>
+      <SignUpContainer>
+        <h2>회원가입</h2>
+        <Form onSubmit={handleSignUp}>
+          <Input
+              type="text"
+              placeholder="이름"
+              value={userName}
+              onChange={(e) => setName(e.target.value)}
+              required
+          />
+          <Input
+              type="tel"
+              placeholder="전화번호"
+              value={phoneNumber}
+              onChange={(e) => setPhone(e.target.value)}
+              required
+          />
+          <Input
+              type="email"
+              placeholder="이메일"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+          />
+          <Input
+              type="id"
+              placeholder="아이디"
+              value={loginId}
+              onChange={(e) => setId(e.target.value)}
+              required
+          />
+          <Input
+              type="password"
+              placeholder="비밀번호"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+          />
+          <Input
+              type="password"
+              placeholder="비밀번호 재확인"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              required
+          />
+          <Button type="submit">회원가입</Button>
+        </Form>
+      </SignUpContainer>
   );
 };
 

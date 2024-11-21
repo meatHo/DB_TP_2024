@@ -92,9 +92,9 @@ const TopBar = () => {
 
   const handleLogout = async () => {
     try {
-      /* await axios.post('http://localhost:8080/api/logout', {}, {
+      await axios.post('http://localhost:8080/api/logout', {}, {
         withCredentials: true, // 쿠키를 포함하여 요청
-      }); */
+      });
       setIsLoggedIn(false); // 로그아웃 후 상태 업데이트
       navigate('/'); // 홈 페이지로 이동
     } catch (error) {

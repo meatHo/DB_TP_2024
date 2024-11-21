@@ -8,6 +8,8 @@ import com.example.db_team.user.dto.UserSignUpRequest;
 import com.example.db_team.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.exception.ConstraintViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,15 +20,19 @@ public class UserController implements UserControllerDocs {
 
     private final UserService userService;
 
-    @PostMapping("/validate")
-    public void checkDuplicateId(@RequestParam String id) {
-        userService.checkDuplicateId(id);
-    }
-
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
-        userService.signUp(userSignUpRequest);
-        return ResponseEntity.ok("Signup successful!");
+        try {
+            userService.signUp(userSignUpRequest);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("User successfully registered");
+        } catch (ConstraintViolationException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT)
+                    .body("User already exists");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("An error occurred during registration");
+        }
     }
 
     @PostMapping("/login")

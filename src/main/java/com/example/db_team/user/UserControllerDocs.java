@@ -10,13 +10,6 @@ import org.springframework.http.ResponseEntity;
 
 @Tag(name = "User", description = "유저 관련 API")
 public interface UserControllerDocs {
-    @Operation(summary = "아이디 중복 확인", description = "회원가입 시 아이디 중복을 확인한다.")
-    @ApiResponse(responseCode = "200", description = "아이디 중복 확인 성공")
-    @ApiResponse(responseCode = "400", description = "아이디 중복 확인 실패")
-    void checkDuplicateId(
-            @Schema(description = "중복 확인할 아이디", example = "testId")
-            String id
-    );
 
     @Operation(summary = "회원가입", description = "회원가입을 한다.")
     @ApiResponse(responseCode = "200", description = "회원가입 성공")
@@ -32,7 +25,7 @@ public interface UserControllerDocs {
     UserLoginResponse login(
             @Schema(description = "로그인 정보", implementation = UserLoginRequest.class)
             UserLoginRequest userLoginRequest,
-            @Schema(description = "HTTP session for user login")
+            @Schema(description = "HTTP session for user login. The session will store the user ID upon successful login.")
             HttpSession session
     );
 
@@ -40,7 +33,7 @@ public interface UserControllerDocs {
     @ApiResponse(responseCode = "200", description = "로그아웃 성공")
     @ApiResponse(responseCode = "400", description = "로그아웃 실패")
     void logout(
-            @Schema(description = "HTTP session for user logout")
+            @Schema(description = "HTTP session for user logout. The session will be invalidated upon logout.")
             HttpSession session
     );
 
@@ -48,7 +41,7 @@ public interface UserControllerDocs {
     @ApiResponse(responseCode = "200", description = "유저 정보 조회 성공", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "400", description = "유저 정보 조회 실패")
     UserInfoResponse getUserInfo(
-            @Schema(description = "HTTP session to identify the logged-in user")
+            @Schema(description = "HTTP session to identify the logged-in user. The session should contain the user ID.")
             HttpSession session
     );
 }
