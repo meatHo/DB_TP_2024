@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 public class UserController implements UserControllerDocs {
 
-    private UserService userService;
+    private final UserService userService;
 
     @PostMapping("/validate")
     public void checkDuplicateId(@RequestParam String id) {
