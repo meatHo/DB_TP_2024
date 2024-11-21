@@ -8,6 +8,7 @@ import com.example.db_team.user.dto.UserSignUpRequest;
 import com.example.db_team.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RequiredArgsConstructor
@@ -23,8 +24,9 @@ public class UserController implements UserControllerDocs {
     }
 
     @PostMapping("/signup")
-    public void signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
+    public ResponseEntity<String> signUp(@RequestBody UserSignUpRequest userSignUpRequest) {
         userService.signUp(userSignUpRequest);
+        return ResponseEntity.ok("Signup successful!");
     }
 
     @PostMapping("/login")
@@ -39,8 +41,12 @@ public class UserController implements UserControllerDocs {
         session.invalidate();
     }
 
-    @GetMapping("/{userId}")
-    public UserInfoResponse getUserInfo(@PathVariable Long userId) {
+    @GetMapping("/user_info")
+    public UserInfoResponse getUserInfo(HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if(userId == null) {
+            throw new RuntimeException("User not logged in!");
+        }
         return userService.getUserInfo(userId);
     }
 }
