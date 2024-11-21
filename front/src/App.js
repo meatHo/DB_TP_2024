@@ -64,7 +64,7 @@ const TopBar = () => {
     // 서버에 로그인 상태를 확인하는 요청
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/check-login', {
+        const response = await axios.get('http://localhost:8080/api/check_login', {
           withCredentials: true, // 쿠키를 포함하여 요청
         });
         if (response.status === 200) {
