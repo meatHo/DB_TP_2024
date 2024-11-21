@@ -18,10 +18,8 @@ public class UserService {
 
     private final UserRepository userRepository;
 
-    public void checkDuplicateId(String id) {
-        if(userRepository.findByLoginId(id).isPresent()) {
-            throw new RuntimeException("ID already exists!");
-        }
+    public boolean checkDuplicateId(String loginId) {
+        return userRepository.existsByLoginId(loginId);
     }
 
     @Transactional
