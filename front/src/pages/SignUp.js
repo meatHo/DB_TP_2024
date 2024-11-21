@@ -30,7 +30,7 @@ const SignUp = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        //body: JSON.stringify({ userName, phoneNumber, email, loginId, password: encryptedPassword }), // 암호화된 비밀번호 전송
+        body: JSON.stringify({ userName, phoneNumber, email, loginId, password: encryptedPassword }), // 암호화된 비밀번호 전송
 
       });
 
