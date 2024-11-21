@@ -24,16 +24,16 @@ public class UserService {
 
     @Transactional
     public void signUp(UserSignUpRequest userSignUpRequest) {
-        if(userRepository.findByLoginId(userSignUpRequest.userLoginId()).isPresent()) {
+        if(userRepository.findByLoginId(userSignUpRequest.loginId()).isPresent()) {
             throw new RuntimeException("ID already exists!");
         }
 
         User user = User.builder()
-                .loginId(userSignUpRequest.userLoginId())
+                .loginId(userSignUpRequest.loginId())
                 .userName(userSignUpRequest.userName())
                 .email(userSignUpRequest.email())
-                .phoneNumber(userSignUpRequest.userPhoneNumber())
-                .password(userSignUpRequest.userPassword())
+                .phoneNumber(userSignUpRequest.phoneNumber())
+                .password(userSignUpRequest.password())
                 .build();
         userRepository.save(user);
     }

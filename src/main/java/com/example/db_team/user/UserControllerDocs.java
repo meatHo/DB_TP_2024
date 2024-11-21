@@ -10,13 +10,6 @@ import org.springframework.http.ResponseEntity;
 
 @Tag(name = "User", description = "유저 관련 API")
 public interface UserControllerDocs {
-    @Operation(summary = "아이디 중복 확인", description = "회원가입 시 아이디 중복을 확인한다.")
-    @ApiResponse(responseCode = "200", description = "아이디 중복 확인 성공")
-    @ApiResponse(responseCode = "400", description = "아이디 중복 확인 실패")
-    ResponseEntity<String> checkDuplicateId(
-            @Schema(description = "중복 확인할 아이디", example = "testId")
-            String id
-    );
 
     @Operation(summary = "회원가입", description = "회원가입을 한다.")
     @ApiResponse(responseCode = "200", description = "회원가입 성공")
@@ -39,7 +32,7 @@ public interface UserControllerDocs {
     @Operation(summary = "로그아웃", description = "로그아웃을 한다.")
     @ApiResponse(responseCode = "200", description = "로그아웃 성공")
     @ApiResponse(responseCode = "400", description = "로그아웃 실패")
-    ResponseEntity<String> logout(
+    void logout(
             @Schema(description = "HTTP session for user logout. The session will be invalidated upon logout.")
             HttpSession session
     );
