@@ -79,15 +79,15 @@ const TopBar = () => {
     };
 
     checkLoginStatus();
-  }, []); 
+  }, []);
 
 
-/*
-  //테스트 코드   
-  useEffect(() => {
-    // 실제 서버 요청 대신 임시로 로그인 상태를 설정
-    setIsLoggedIn(true); // 임시로 로그인된 상태로 설정
-  }, []); */
+  /*
+    //테스트 코드   
+    useEffect(() => {
+      // 실제 서버 요청 대신 임시로 로그인 상태를 설정
+      setIsLoggedIn(true); // 임시로 로그인된 상태로 설정
+    }, []); */
 
 
   const handleLogout = async () => {

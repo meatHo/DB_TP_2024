@@ -11,7 +11,7 @@ const MyInfo = () => {
   useEffect(() => {
     const fetchUserInfo = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/user-info', {
+        const response = await axios.get('http://localhost:8080/api/user_info', {
           withCredentials: true, // 쿠키 포함
         });
 
@@ -47,13 +47,13 @@ const MyInfo = () => {
  
     // localStorage에서 사용자 정보 불러오기
     const storedUserInfo = localStorage.getItem('userInfo');
-    if (storedUserInfo) {
+    if (storedUserInfo) 
       setUserInfo(JSON.parse(storedUserInfo)); // JSON 문자열을 객체로 변환하여 저장
     }
   }, [navigate]);*/
 
   const handleEditInfo = () => {
-    navigate('/edit-info');
+    navigate('/edit_info');
   };
 
   if (!userInfo) {
@@ -66,15 +66,15 @@ const MyInfo = () => {
       <InfoContainer>
         <InfoRow>
           <Label>아이디:</Label>
-          <Value>{userInfo.id}</Value>
+          <Value>{userInfo.loginId}</Value>
         </InfoRow>
         <InfoRow>
           <Label>이름:</Label>
-          <Value>{userInfo.name}</Value>
+          <Value>{userInfo.userName}</Value>
         </InfoRow>
         <InfoRow>
           <Label>전화번호:</Label>
-          <Value>{userInfo.phone}</Value>
+          <Value>{userInfo.phoneNumber}</Value>
         </InfoRow>
         <InfoRow>
           <Label>이메일:</Label>
