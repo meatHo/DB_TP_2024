@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.http.ResponseEntity;
 
 @Tag(name = "User", description = "유저 관련 API")
 public interface UserControllerDocs {
@@ -20,7 +21,7 @@ public interface UserControllerDocs {
     @Operation(summary = "회원가입", description = "회원가입을 한다.")
     @ApiResponse(responseCode = "200", description = "회원가입 성공")
     @ApiResponse(responseCode = "400", description = "회원가입 실패")
-    void signUp(
+    ResponseEntity<String> signUp(
             @Schema(description = "회원가입 정보", implementation = UserSignUpRequest.class)
             UserSignUpRequest userSignUpRequest
     );
@@ -31,6 +32,7 @@ public interface UserControllerDocs {
     UserLoginResponse login(
             @Schema(description = "로그인 정보", implementation = UserLoginRequest.class)
             UserLoginRequest userLoginRequest,
+            @Schema(description = "HTTP session for user login")
             HttpSession session
     );
 
@@ -38,7 +40,7 @@ public interface UserControllerDocs {
     @ApiResponse(responseCode = "200", description = "로그아웃 성공")
     @ApiResponse(responseCode = "400", description = "로그아웃 실패")
     void logout(
-            @Schema(description = "로그아웃 정보", implementation = UserLogoutRequest.class)
+            @Schema(description = "HTTP session for user logout")
             HttpSession session
     );
 
@@ -46,7 +48,7 @@ public interface UserControllerDocs {
     @ApiResponse(responseCode = "200", description = "유저 정보 조회 성공", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "400", description = "유저 정보 조회 실패")
     UserInfoResponse getUserInfo(
-            @Schema(description = "유저 식별 ID", example = "1")
-            Long userId
+            @Schema(description = "HTTP session to identify the logged-in user")
+            HttpSession session
     );
 }

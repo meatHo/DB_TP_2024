@@ -16,7 +16,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     public void checkDuplicateId(String id) {
         if(userRepository.findByLoginId(id).isPresent()) {
@@ -26,6 +26,10 @@ public class UserService {
 
     @Transactional
     public void signUp(UserSignUpRequest userSignUpRequest) {
+        if(userRepository.findByLoginId(userSignUpRequest.userLoginId()).isPresent()) {
+            throw new RuntimeException("ID already exists!");
+        }
+
         User user = User.builder()
                 .loginId(userSignUpRequest.userLoginId())
                 .userName(userSignUpRequest.userName())
