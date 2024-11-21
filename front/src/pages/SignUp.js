@@ -34,7 +34,7 @@ const SignUp = () => {
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.text();
         console.log('회원가입 성공:', data);
         alert('회원가입이 완료되었습니다.');
         navigate('/login');
