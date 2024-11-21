@@ -12,8 +12,8 @@ public record UserInfoResponse(
         @Schema(description = "이름", example = "홍길동")
         String userName,
 
-        @Schema(description = "닉네임", example = "각시탈")
-        String userNickName,
+        @Schema(description = "이메일", example = "test@gmail.com")
+        String email,
 
         @Schema(description = "전화번호", example = "010-1234-5678")
         String userPhoneNumber) {
