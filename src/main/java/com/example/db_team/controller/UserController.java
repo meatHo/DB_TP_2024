@@ -19,8 +19,12 @@ public class UserController implements UserControllerDocs {
     private final UserService userService;
 
     @PostMapping("/validate")
-    public void checkDuplicateId(@RequestParam String id) {
-        userService.checkDuplicateId(id);
+    public ResponseEntity<String> checkDuplicateId(@RequestParam String id) {
+        boolean isDuplicate = userService.checkDuplicateId(id);
+        if (isDuplicate) {
+            return ResponseEntity.status(400).body("ID already exists");
+        }
+        return ResponseEntity.ok("ID is available");
     }
 
     @PostMapping("/signup")
@@ -37,8 +41,9 @@ public class UserController implements UserControllerDocs {
     }
 
     @PostMapping("/logout")
-    public void logout(HttpSession session) {
+    public ResponseEntity<String> logout(HttpSession session) {
         session.invalidate();
+        return ResponseEntity.ok("Logout success!");
     }
 
     @GetMapping("/user_info")
