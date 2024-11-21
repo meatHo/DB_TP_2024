@@ -18,15 +18,15 @@ public class User {
     private long id;
     private String loginId;
     private String userName;
-    private String nickName;
+    private String email;
     private String phoneNumber;
     private String password;
 
     @Builder
-    private User(String loginId, String userName, String nickName, String phoneNumber, String password) {
+    private User(String loginId, String userName, String email, String phoneNumber, String password) {
         this.loginId = loginId;
         this.userName = userName;
-        this.nickName = nickName;
+        this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
     }

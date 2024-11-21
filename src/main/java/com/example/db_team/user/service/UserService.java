@@ -29,7 +29,7 @@ public class UserService {
         User user = User.builder()
                 .loginId(userSignUpRequest.userLoginId())
                 .userName(userSignUpRequest.userName())
-                .nickName(userSignUpRequest.userNickName())
+                .email(userSignUpRequest.email())
                 .phoneNumber(userSignUpRequest.userPhoneNumber())
                 .password(userSignUpRequest.userPassword())
                 .build();
@@ -59,7 +59,7 @@ public class UserService {
                 user.getId(),
                 user.getLoginId(),
                 user.getUserName(),
-                user.getNickName(),
+                user.getEmail(),
                 user.getPhoneNumber()
         );
     }
