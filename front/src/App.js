@@ -7,11 +7,7 @@ import SignUp from './pages/SignUp';
 import MyReviews from './pages/MyReviews';
 import Search from './pages/Search';
 import MyInfo from './pages/MyInfo';
-<<<<<<< HEAD
 import WineInfo from './pages/WineInfo';
-=======
-import WineInfo from './WineInfo';
->>>>>>> a36bf9137467a2953a10d730fa5efeab1f6029e5
 import homeIcon from './assets/home_icon.svg';
 import reviewIcon from './assets/review_icon.svg';
 import profileIcon from './assets/profile_icon.svg';
@@ -55,7 +51,7 @@ const App = () => {
           <Route path="/reviews" element={<MyReviews />} />
           <Route path="/info" element={<MyInfo />} />
           <Route path="/search" element={<Search />} />
-          <Route path="/wine-info/:wineName" element={<WineInfo />} />
+          <Route path="/wine/:wineName" element={<WineInfo />} />
         </Routes>
       </Container>
     </Router>
