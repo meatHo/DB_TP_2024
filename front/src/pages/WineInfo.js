@@ -27,11 +27,13 @@ const WineInfo = () => {
   return (
     <div>
       <h1>{wineDetails.eng_name}</h1>
-      <p>{wineDetails.name}</p>
+      <p>{wineDetails.kor_name}</p>
       <p>와인 종류: {wineDetails.type}</p>
-      <p>국가: {wineDetails.country}</p>
+      <p>생산지: {wine.country} / {wine.region}</p>
+      <p>와이너리: {wine.winery}</p>
+      <p>포도 품종: {wine.grape_variety}</p>
       <p>평점: {wineDetails.rating}</p>
-      <p>설명: {wineDetails.description}</p>
+      <p>가격: {wine.price} 원</p>
       {/* 와인에 대한 추가 정보를 여기에 표시 */}
       {/* field 변수명 설정하고 그 다음에 추가 ㄱㄱ*/ }
     </div>
