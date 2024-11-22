@@ -7,6 +7,7 @@ import SignUp from './pages/SignUp';
 import MyReviews from './pages/MyReviews';
 import Search from './pages/Search';
 import MyInfo from './pages/MyInfo';
+import WineInfo from './WineInfo';
 import homeIcon from './assets/home_icon.svg';
 import reviewIcon from './assets/review_icon.svg';
 import profileIcon from './assets/profile_icon.svg';

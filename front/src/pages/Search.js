@@ -173,7 +173,13 @@ const SearchResult = () => {
           <ResultCard key={index}>
             <WineImage src={wineImage} alt="와인 이미지" />
             <ResultContent>
-              <WineTitle>{result.eng_name}</WineTitle>
+              {/*WineTitle 클릭하면 상세페이지(WineInfo 실행)로 이동*/}
+              <WineTitle
+                onClick={() => navigate(`/wine/${result.eng_name}`)}
+                role="button"
+              >
+                {result.eng_name}
+              </WineTitle>
               <WineSubtitle>{result.name}</WineSubtitle>
               <WineInfo>
                 <WineType type={result.type}>{result.type}</WineType> {/* 와인 종류에 따라 색상 변경 */}
