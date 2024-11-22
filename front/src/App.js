@@ -7,7 +7,11 @@ import SignUp from './pages/SignUp';
 import MyReviews from './pages/MyReviews';
 import Search from './pages/Search';
 import MyInfo from './pages/MyInfo';
+<<<<<<< HEAD
 import WineInfo from './pages/WineInfo';
+=======
+import WineInfo from './WineInfo';
+>>>>>>> a36bf9137467a2953a10d730fa5efeab1f6029e5
 import homeIcon from './assets/home_icon.svg';
 import reviewIcon from './assets/review_icon.svg';
 import profileIcon from './assets/profile_icon.svg';
@@ -66,7 +70,7 @@ const TopBar = () => {
     // 서버에 로그인 상태를 확인하는 요청
     const checkLoginStatus = async () => {
       try {
-        const response = await axios.get('http://localhost:8080/api/check-login', {
+        const response = await axios.get('http://localhost:8080/api/check_login', {
           withCredentials: true, // 쿠키를 포함하여 요청
         });
         if (response.status === 200) {
@@ -81,22 +85,22 @@ const TopBar = () => {
     };
 
     checkLoginStatus();
-  }, []); 
+  }, []);
 
 
-/*
-  //테스트 코드   
-  useEffect(() => {
-    // 실제 서버 요청 대신 임시로 로그인 상태를 설정
-    setIsLoggedIn(true); // 임시로 로그인된 상태로 설정
-  }, []); */
+  /*
+    //테스트 코드   
+    useEffect(() => {
+      // 실제 서버 요청 대신 임시로 로그인 상태를 설정
+      setIsLoggedIn(true); // 임시로 로그인된 상태로 설정
+    }, []); */
 
 
   const handleLogout = async () => {
     try {
-      /* await axios.post('http://localhost:8080/api/logout', {}, {
+      await axios.post('http://localhost:8080/api/logout', {}, {
         withCredentials: true, // 쿠키를 포함하여 요청
-      }); */
+      });
       setIsLoggedIn(false); // 로그아웃 후 상태 업데이트
       navigate('/'); // 홈 페이지로 이동
     } catch (error) {

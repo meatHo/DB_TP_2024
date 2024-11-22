@@ -7,13 +7,14 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [phone, setPhone] = useState('');
-  const [name, setName] = useState('');
+  const [phoneNumber, setPhone] = useState('');
+  const [userName, setName] = useState('');
+  const [loginId, setId] = useState('');
   const navigate = useNavigate();
 
   const handleSignUp = async (event) => {
     event.preventDefault();
-  
+
     // 비밀번호와 비밀번호 재확인 일치 여부 확인
     if (password !== confirmPassword) {
       alert('비밀번호가 일치하지 않습니다.');
@@ -29,17 +30,18 @@ const SignUp = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password: encryptedPassword, phone, name }), // 암호화된 비밀번호 전송
+        body: JSON.stringify({ userName, phoneNumber, email, loginId, password: encryptedPassword }), // 암호화된 비밀번호 전송
+
       });
 
       if (response.ok) {
-        const data = await response.json();
+        const data = await response.text();
         console.log('회원가입 성공:', data);
         alert('회원가입이 완료되었습니다.');
         navigate('/login');
       } else {
         const errorMessage = await response.text();
-        
+
         if (response.status === 409) { // 중복 에러 발생 시
           alert(errorMessage); // "이미 존재하는 이메일입니다." 또는 "이미 존재하는 전화번호입니다."
         } else {
@@ -60,8 +62,15 @@ const SignUp = () => {
         <Input
           type="text"
           placeholder="이름"
-          value={name}
+          value={userName}
           onChange={(e) => setName(e.target.value)}
+          required
+        />
+        <Input
+          type="tel"
+          placeholder="전화번호"
+          value={phoneNumber}
+          onChange={(e) => setPhone(e.target.value)}
           required
         />
         <Input
@@ -69,6 +78,13 @@ const SignUp = () => {
           placeholder="이메일"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <Input
+          type="id"
+          placeholder="아이디"
+          value={loginId}
+          onChange={(e) => setId(e.target.value)}
           required
         />
         <Input
@@ -83,13 +99,6 @@ const SignUp = () => {
           placeholder="비밀번호 재확인"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        <Input
-          type="tel"
-          placeholder="전화번호"
-          value={phone}
-          onChange={(e) => setPhone(e.target.value)}
           required
         />
         <Button type="submit">회원가입</Button>
