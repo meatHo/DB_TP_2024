@@ -24,6 +24,7 @@ public class UserService {
 
     @Transactional
     public void signUp(UserSignUpRequest userSignUpRequest) {
+
         if(userRepository.findByLoginId(userSignUpRequest.loginId()).isPresent()) {
             throw new RuntimeException("ID already exists!");
         }
@@ -40,12 +41,11 @@ public class UserService {
 
     @Transactional
     public UserLoginResponse login(UserLoginRequest userLoginRequest) {
-        Optional<User> result = userRepository.findByLoginId(userLoginRequest.userLoginId());
-        if(result.isPresent() && result.get().getPassword().equals(userLoginRequest.userPassword())) {
-            return new UserLoginResponse(result.get().getId());
-        } else {
-            throw new RuntimeException("Invalid login info!");
-        }
+
+        return userRepository.findByLoginId(userLoginRequest.loginId())
+                .filter(user -> user.getPassword().equals(userLoginRequest.password()))
+                .map(user -> new UserLoginResponse(user.getId()))
+                .orElseThrow(() -> new RuntimeException("로그인 실패"));
     }
 
     public UserInfoResponse getUserInfo(Long userId) {
