@@ -3,7 +3,7 @@
     font-family: 'Arial', sans-serif;
     line-height: 1.6;
     width: 100vw; /* 뷰포트의 가로 길이 100% */
-    height: 100vh; /* 뷰포트의 세로 길이 100% */
+    height: auto; /* 뷰포트의 세로 길이 100% */
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -52,4 +52,8 @@
   }
   .review strong {
     color: #7d4cdb;
+  }
+
+  .last-element {
+    margin-bottom: 5rem; /* 10줄 정도의 여백 */
   }

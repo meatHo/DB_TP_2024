@@ -5,7 +5,7 @@ import './WineInfo.css';
 
 const WineInfo = () => {
   const { wineName } = useParams(); // URL에서 와인 이름을 가져옴
-  const [wineDetails, setWineDetails] = useState(null);
+  const [wineDetails, setWineDetails] = useState({});
   const [newReview, setNewReview] = useState({
     score: "",
     comment: "",
@@ -16,19 +16,24 @@ const WineInfo = () => {
   });
 
 
-//   useEffect(() => {
-//     // 서버에서 와인 상세 정보 가져오기
-//     const fetchWineDetails = async () => {
-//       try {
-//         const response = await axios.get(`http://localhost:8080/api/wine/${wineName}`);
-//         setWineDetails(response.data);
-//       }  catch (error) {
-//         console.error('와인 상세 정보 요청 실패:', error);
-//       }
-//     };
+  // useEffect(() => {
+  //   if (!wineDetails) {
+  //     return <p>로딩 중...</p>; // 데이터가 없을 때 로딩 메시지를 표시
+  //   }
+  //   // 서버에서 와인 상세 정보 가져오기
+  //   const fetchWineDetails = async () => {
+  //     try {
+  //       const response = await axios.get(`http://localhost:8080/api/wine/${wineName}`);
+  //       setWineDetails(response.data);
+  //     }  catch (error) {
+  //       console.error('와인 상세 정보 요청 실패:', error);
+  //     }
+  //   };
 
-//     fetchWineDetails();
-//   }, [wineName]);
+  //   fetchWineDetails();
+  // }, [wineName]);
+
+
 
   //백엔드 구현 전 Test Dataset
   const mockWineDetails = {
@@ -112,6 +117,10 @@ const WineInfo = () => {
     alert("리뷰 전송에 실패했습니다.");
   }
   };
+  
+  if (!wineDetails.eng_name) {
+    return <p>로딩 중...</p>;
+  }
 
   return (
     <div className="wine-info-container">
@@ -176,6 +185,9 @@ const WineInfo = () => {
         </div>
         <button type="submit">리뷰 제출</button>
       </form>
+      <div className="last-element">
+      <p>Good.</p>
+      </div>
     </div>
   );
 };
