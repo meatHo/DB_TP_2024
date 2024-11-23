@@ -1,0 +1,55 @@
+/* 전체 컨테이너 스타일 */
+.wine-info-container {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    width: 100vw; /* 뷰포트의 가로 길이 100% */
+    height: 100vh; /* 뷰포트의 세로 길이 100% */
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 제목 스타일 */
+  .wine-info-container h1 {
+    font-size: 2rem;
+    color: #4a4a4a;
+    margin-bottom: 10px;
+  }
+  
+  .wine-info-container h2 {
+    font-size: 1.5rem;
+    color: #7d4cdb;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* 텍스트 스타일 */
+  .wine-info-container p {
+    font-size: 1rem;
+    color: #333;
+    margin: 5px 0;
+  }
+  
+  /* 강조 텍스트 */
+  .wine-info-container p strong {
+    color: #7d4cdb;
+  }
+  
+  /* 가격 강조 */
+  .wine-info-container p:last-child {
+    font-weight: bold;
+    color: #d9534f;
+  }
+  
+  .review {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .review strong {
+    color: #7d4cdb;
+  }
