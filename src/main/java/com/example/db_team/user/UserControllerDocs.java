@@ -22,7 +22,7 @@ public interface UserControllerDocs {
     @Operation(summary = "로그인", description = "로그인을 한다.")
     @ApiResponse(responseCode = "200", description = "로그인 성공", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "400", description = "로그인 실패")
-    UserLoginResponse login(
+    ResponseEntity<String> login(
             @Schema(description = "로그인 정보", implementation = UserLoginRequest.class)
             UserLoginRequest userLoginRequest,
             @Schema(description = "HTTP session for user login. The session will store the user ID upon successful login.")
