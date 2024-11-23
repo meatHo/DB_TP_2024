@@ -72,21 +72,21 @@ const SearchResult = () => {
       const mockResults = [
         {
           eng_name: 'Polperro and Even Keel Wines',
-          name: '폴페로 앤 이븐 킬 와인',
+          kor_name: '폴페로 앤 이븐 킬 와인',
           type: '레드',
           country: '프랑스',
           rating: 4.3,
         },
         {
           eng_name: 'Castello di Ama',
-          name: '카스텔로 디 아마',
+          kor_name: '카스텔로 디 아마',
           type: '레드',
           country: '이탈리아',
           rating: 4.5,
         },
         {
           eng_name: 'Bodegas Vega Sicilia',
-          name: '베가 시실리아 와인',
+          kor_name: '베가 시실리아 와인',
           type: '화이트',
           country: '스페인',
           rating: 4.7,
@@ -180,7 +180,7 @@ const SearchResult = () => {
               >
                 {result.eng_name}
               </WineTitle>
-              <WineSubtitle>{result.name}</WineSubtitle>
+              <WineSubtitle>{result.kor_name}</WineSubtitle>
               <WineInfo>
                 <WineType type={result.type}>{result.type}</WineType> {/* 와인 종류에 따라 색상 변경 */}
                 <Country>{result.country}</Country>
