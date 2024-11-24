@@ -7,38 +7,38 @@ const MyReviews = () => {
     const navigate = useNavigate();
     const [reviews, setReviews] = useState([]);
     const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        const fetchReviews = async () => {
-            try {
-                const response = await axios.get('http://localhost:8080/api/reviews/me', {
-                    withCredentials: true, // 쿠키 포함
-                });
-
-                if (response.status === 200) {
-                    setReviews(response.data); // 리뷰 데이터 저장
-                } else if (response.status === 401) {
-                    alert('로그인이 필요합니다.');
-                    navigate('/login'); // 로그인 페이지로 리다이렉트
-                } else {
-                    console.error('리뷰 데이터를 가져오지 못했습니다.');
-                    alert('리뷰 데이터를 가져오지 못했습니다.');
+    /* 
+        useEffect(() => {
+            const fetchReviews = async () => {
+                try {
+                    const response = await axios.get('http://localhost:8080/api/reviews/me', {
+                        withCredentials: true, // 쿠키 포함
+                    });
+    
+                    if (response.status === 200) {
+                        setReviews(response.data); // 리뷰 데이터 저장
+                    } else if (response.status === 401) {
+                        alert('로그인이 필요합니다.');
+                        navigate('/login'); // 로그인 페이지로 리다이렉트
+                    } else {
+                        console.error('리뷰 데이터를 가져오지 못했습니다.');
+                        alert('리뷰 데이터를 가져오지 못했습니다.');
+                        navigate('/');
+                    }
+                } catch (error) {
+                    console.error('리뷰 데이터 요청 에러:', error);
+                    alert('서버와의 연결에 문제가 발생했습니다.');
                     navigate('/');
+                } finally {
+                    setLoading(false);
                 }
-            } catch (error) {
-                console.error('리뷰 데이터 요청 에러:', error);
-                alert('서버와의 연결에 문제가 발생했습니다.');
-                navigate('/');
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchReviews();
-    }, [navigate]);
+            };
+    
+            fetchReviews();
+        }, [navigate]); */
 
     //테스트 코드
-    /* useEffect(() => {
+    useEffect(() => {
         // Mock 데이터 로드
         const mockReviews = [
             {
@@ -69,7 +69,7 @@ const MyReviews = () => {
             setReviews(mockReviews); // Mock 데이터를 상태로 설정
             setLoading(false); // 로딩 상태 종료
         }, 1000); // 로딩 상태를 확인하기 위해 1초 지연
-    }, []); */
+    }, []);
 
     if (loading) {
         return <LoadingMessage>로딩 중...</LoadingMessage>;
@@ -88,7 +88,7 @@ const MyReviews = () => {
                         <WineName>{review.wineName}</WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>
-                            <Date>{new Date(review.date).toLocaleDateString()}</Date>
+                            <Date>{review.date}</Date>
                         </ReviewDetails>
                         <ReviewContent>{review.content}</ReviewContent>
                     </ReviewCard>
