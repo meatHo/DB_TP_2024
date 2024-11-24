@@ -36,10 +36,16 @@ public class UserController implements UserControllerDocs {
     }
 
     @PostMapping("/login")
-    public UserLoginResponse login(@RequestBody UserLoginRequest userLoginRequest, HttpSession session) {
-        UserLoginResponse response =  userService.login(userLoginRequest);
-        session.setAttribute("userId", response.userId());
-        return response;
+    public ResponseEntity<String> login(@RequestBody UserLoginRequest userLoginRequest, HttpSession session) {
+        try {
+            UserLoginResponse response =  userService.login(userLoginRequest);
+            session.setAttribute("userId", response.userId());
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("로그인 성공");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+                    .body("로그인 실패");
+        }
     }
 
     @PostMapping("/logout")
@@ -55,4 +61,5 @@ public class UserController implements UserControllerDocs {
         }
         return userService.getUserInfo(userId);
     }
+
 }

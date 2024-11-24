@@ -24,7 +24,8 @@ const Login = () => {
 
       if (response.status === 200) {
         console.log('로그인 성공:', response.data);
-        navigate('/'); // 홈 페이지로 이동
+        window.location.href = '/';
+        //navigate('/'); // 홈 페이지로 이동
       } else {
         console.error('로그인 실패');
         alert('로그인에 실패했습니다. 다시 시도해 주세요.');
