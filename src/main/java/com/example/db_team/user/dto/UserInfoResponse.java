@@ -7,7 +7,7 @@ public record UserInfoResponse(
         Long userId,
 
         @Schema(description = "로그인 아이디", example = "testId")
-        String userLoginId,
+        String loginId,
 
         @Schema(description = "이름", example = "홍길동")
         String userName,
@@ -16,5 +16,5 @@ public record UserInfoResponse(
         String email,
 
         @Schema(description = "전화번호", example = "010-1234-5678")
-        String userPhoneNumber) {
+        String phoneNumber) {
 }
