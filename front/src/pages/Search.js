@@ -46,7 +46,7 @@ const SearchResult = () => {
   // 서버로부터 검색 결과 데이터를 가져오는 함수
   const fetchResults = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/search', {
+      const response = await axios.get('http://localhost:8080/api/wines', {
         params: {
           q: searchTerm,
           origin: originFilter,
@@ -98,7 +98,6 @@ const SearchResult = () => {
 
   return (
     <Main>
-
       <SearchBar>
         <SearchInput
           type="text"
