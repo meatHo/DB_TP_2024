@@ -11,7 +11,7 @@ const MyReviews = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/my_reviews', {
+                const response = await axios.get('http://localhost:8080/api/reviews/me', {
                     withCredentials: true, // 쿠키 포함
                 });
 
@@ -45,21 +45,21 @@ const MyReviews = () => {
                 id: 1,
                 wineName: 'Chardonnay',
                 rating: 5,
-                timestamp: '2024-11-20T14:00:00',
+                date: '2024-11-20',
                 content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
             },
             {
                 id: 2,
                 wineName: 'Merlot',
                 rating: 4,
-                timestamp: '2024-11-18T12:30:00',
+                date: '2024-11-18',
                 content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
             },
             {
                 id: 3,
                 wineName: 'Cabernet Sauvignon',
                 rating: 4.5,
-                timestamp: '2024-11-19T15:00:00',
+                date: '2024-11-19',
                 content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
             },
         ];
@@ -88,7 +88,7 @@ const MyReviews = () => {
                         <WineName>{review.wineName}</WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>
-                            <Timestamp>{new Date(review.timestamp).toLocaleDateString()}</Timestamp>
+                            <Date>{new Date(review.date).toLocaleDateString()}</Date>
                         </ReviewDetails>
                         <ReviewContent>{review.content}</ReviewContent>
                     </ReviewCard>
@@ -154,7 +154,7 @@ const Rating = styled.div`
   color: #6c757d;
 `;
 
-const Timestamp = styled.div`
+const Date = styled.div`
   font-size: 14px;
   color: #6c757d;
 `;
