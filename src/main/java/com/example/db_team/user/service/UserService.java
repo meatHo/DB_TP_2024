@@ -44,7 +44,7 @@ public class UserService {
 
         return userRepository.findByLoginId(userLoginRequest.loginId())
                 .filter(user -> user.getPassword().equals(userLoginRequest.password()))
-                .map(user -> new UserLoginResponse(user.getId()))
+                .map(user -> new UserLoginResponse(user.getUserId()))
                 .orElseThrow(() -> new RuntimeException("로그인 실패"));
     }
 
@@ -58,7 +58,6 @@ public class UserService {
         }
 
         return new UserInfoResponse(
-                user.getId(),
                 user.getLoginId(),
                 user.getUserName(),
                 user.getEmail(),

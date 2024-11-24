@@ -11,7 +11,7 @@ const MyReviews = () => {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await axios.get('http://localhost:8080/api/my_reviews', {
+                const response = await axios.get('http://localhost:8080/api/reviews/me', {
                     withCredentials: true, // 쿠키 포함
                 });
 
@@ -42,24 +42,24 @@ const MyReviews = () => {
         // Mock 데이터 로드
         const mockReviews = [
             {
-                id: 1,
+                loginId: 1,
                 wineName: 'Chardonnay',
                 rating: 5,
-                timestamp: '2024-11-20T14:00:00',
+                date: '2024-11-20T14:00:00',
                 content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
             },
             {
-                id: 2,
+                loginId: 2,
                 wineName: 'Merlot',
                 rating: 4,
-                timestamp: '2024-11-18T12:30:00',
+                date: '2024-11-18T12:30:00',
                 content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
             },
             {
-                id: 3,
+                loginId: 3,
                 wineName: 'Cabernet Sauvignon',
                 rating: 4.5,
-                timestamp: '2024-11-19T15:00:00',
+                date: '2024-11-19T15:00:00',
                 content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
             },
         ];

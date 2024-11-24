@@ -3,9 +3,6 @@ package com.example.db_team.user.dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 
 public record UserInfoResponse(
-        @Schema(description = "유저 식별 ID", example = "1")
-        Long userId,
-
         @Schema(description = "로그인 아이디", example = "testId")
         String userLoginId,
 
