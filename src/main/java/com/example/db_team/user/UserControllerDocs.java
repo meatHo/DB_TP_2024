@@ -44,4 +44,5 @@ public interface UserControllerDocs {
             @Schema(description = "HTTP session to identify the logged-in user. The session should contain the user ID.")
             HttpSession session
     );
+
 }

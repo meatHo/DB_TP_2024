@@ -61,12 +61,5 @@ public class UserController implements UserControllerDocs {
         }
         return userService.getUserInfo(userId);
     }
-    @GetMapping("/check_login")
-    public ResponseEntity<Void> checkLoginStatus(HttpSession session) {
-        if (session.getAttribute("userId") != null) {
-            return ResponseEntity.ok().build(); // 세션에 userId가 있으면 200 OK
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 로그인되지 않은 경우 401
-        }
-    }
+
 }
