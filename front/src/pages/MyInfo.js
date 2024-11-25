@@ -26,9 +26,21 @@ const MyInfo = () => {
           navigate('/');
         }
       } catch (error) {
-        console.error('사용자 정보 요청 에러:', error);
-        alert('서버와의 연결에 문제가 발생했습니다.');
-        navigate('/');
+        if (error.response) {
+          // 서버가 응답했지만 상태 코드가 2xx가 아닌 경우
+          console.error('사용자 정보 요청 실패 상태: ', error.response.status);
+          console.error('사용자 정보 요청 실패 응답 데이터: ', error.response.data);
+          alert('사용자 정보를 불러오는 데 실패했습니다. 다시 시도해 주세요.');
+        } else if (error.request) {
+          // 서버에 요청했지만 응답이 없는 경우 (네트워크 문제)
+          console.error('서버 응답 없음: ', error.request);
+          alert('서버와의 연결에 문제가 발생했습니다. 네트워크를 확인하고 다시 시도해 주세요.');
+        } else {
+          // 기타 에러 (코드 오류 등)
+          console.error('사용자 정보 요청 중 에러: ', error.message);
+          alert('알 수 없는 문제가 발생했습니다. 다시 시도해 주세요.');
+        }
+        navigate('/'); // 에러 발생 시 홈으로 이동
       }
     };
     fetchUserInfo();

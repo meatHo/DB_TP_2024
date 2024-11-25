@@ -44,6 +44,7 @@ const SearchResult = () => {
 
 
   // 서버로부터 검색 결과 데이터를 가져오는 함수
+  // 서버로부터 검색 결과 데이터를 가져오는 함수
   const fetchResults = async () => {
     try {
       const response = await axios.get('http://localhost:8080/api/wines', {
@@ -57,7 +58,20 @@ const SearchResult = () => {
       });
       setResults(response.data); // 서버로부터 받은 데이터를 검색 결과로 설정
     } catch (error) {
-      console.error('검색 결과 요청 실패:', error);
+      if (error.response) {
+        // 서버가 응답했지만 상태 코드가 2xx가 아닌 경우
+        console.error('검색 결과 요청 실패 상태: ', error.response.status);
+        console.error('검색 결과 요청 실패 응답 데이터: ', error.response.data);
+        alert('검색 결과를 불러오는 데 실패했습니다. 입력 조건을 확인하고 다시 시도해 주세요.');
+      } else if (error.request) {
+        // 서버에 요청했지만 응답이 없는 경우 (네트워크 문제)
+        console.error('서버 응답 없음: ', error.request);
+        alert('서버와의 연결에 문제가 발생했습니다. 네트워크를 확인하고 다시 시도해 주세요.');
+      } else {
+        // 기타 에러 (코드 오류 등)
+        console.error('검색 결과 요청 중 에러: ', error.message);
+        alert('알 수 없는 문제가 발생했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
