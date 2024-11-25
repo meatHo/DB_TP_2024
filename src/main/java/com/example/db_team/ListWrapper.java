@@ -1,4 +1,4 @@
-package com.example.db_team.controller;
+package com.example.db_team;
 
 import java.util.List;
 

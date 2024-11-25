@@ -36,40 +36,40 @@ const MyReviews = () => {
 
         fetchReviews();
     }, [navigate]);
-    /*
-        //테스트 코드
-        useEffect(() => {
-            // Mock 데이터 로드
-            const mockReviews = [
-                {
-                    id: 1,
-                    wineName: 'Chardonnay',
-                    rating: 5,
-                    date: '2024-11-20',
-                    content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
-                },
-                {
-                    id: 2,
-                    wineName: 'Merlot',
-                    rating: 4,
-                    date: '2024-11-18',
-                    content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
-                },
-                {
-                    id: 3,
-                    wineName: 'Cabernet Sauvignon',
-                    rating: 4.5,
-                    date: '2024-11-19',
-                    content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
-                },
-            ];
-    
-            // 로딩 시뮬레이션
-            setTimeout(() => {
-                setReviews(mockReviews); // Mock 데이터를 상태로 설정
-                setLoading(false); // 로딩 상태 종료
-            }, 1000); // 로딩 상태를 확인하기 위해 1초 지연
-        }, []);*/
+  
+    //테스트 코드
+    /* useEffect(() => {
+        // Mock 데이터 로드
+        const mockReviews = [
+            {
+                loginId: 1,
+                wineName: 'Chardonnay',
+                rating: 5,
+                date: '2024-11-20T14:00:00',
+                content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
+            },
+            {
+                loginId: 2,
+                wineName: 'Merlot',
+                rating: 4,
+                date: '2024-11-18T12:30:00',
+                content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
+            },
+            {
+                loginId: 3,
+                wineName: 'Cabernet Sauvignon',
+                rating: 4.5,
+                date: '2024-11-19T15:00:00',
+                content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
+            },
+        ];
+
+        // 로딩 시뮬레이션
+        setTimeout(() => {
+            setReviews(mockReviews); // Mock 데이터를 상태로 설정
+            setLoading(false); // 로딩 상태 종료
+        }, 1000); // 로딩 상태를 확인하기 위해 1초 지연
+    }, []); */
 
     if (loading) {
         return <LoadingMessage>로딩 중...</LoadingMessage>;

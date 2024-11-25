@@ -1,4 +1,4 @@
-package com.example.db_team.controller;
+package com.example.db_team.user.controller;
 
 import com.example.db_team.user.UserControllerDocs;
 import com.example.db_team.user.dto.UserInfoResponse;
@@ -61,5 +61,8 @@ public class UserController implements UserControllerDocs {
         }
         return userService.getUserInfo(userId);
     }
+
+//    @GetMapping("/check_login")
+//    public ResponseEntity<String> checkLogin(HttpSession session) {}
 
 }
