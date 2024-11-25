@@ -36,7 +36,7 @@ const MyReviews = () => {
 
         fetchReviews();
     }, [navigate]);
-  
+
     //테스트 코드
     /* useEffect(() => {
         // Mock 데이터 로드
@@ -84,7 +84,7 @@ const MyReviews = () => {
             <Title>내가 작성한 리뷰</Title>
             <ReviewsContainer>
                 {reviews.map((review) => (
-                    <ReviewCard key={review.id}>
+                    <ReviewCard key={review.loginId}>
                         <WineName>{review.wineName}</WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>
