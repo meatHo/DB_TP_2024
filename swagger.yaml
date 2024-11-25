@@ -1,0 +1,331 @@
+openapi: 3.0.0
+info:
+  title: Wine Review API
+  description: API for user authentication, wine details, and reviews.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080/api
+    description: Local development server
+
+paths:
+  /signup:
+    post:
+      summary: 회원가입
+      description: Register a new user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: password123
+      responses:
+        '201':
+          description: User successfully registered.
+        '400':
+          description: Invalid input.
+
+  /login:
+    post:
+      summary: 로그인
+      description: Log in an existing user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                  example: johndoe
+                password:
+                  type: string
+                  example: password123
+      responses:
+        '200':
+          description: Login successful.
+        '401':
+          description: Invalid credentials.
+
+  /logout:
+    get:
+      summary: 로그아웃
+      description: Log out the current user.
+      responses:
+        '200':
+          description: Logout successful.
+
+  /user_info:
+    post:
+      summary: 유저 정보
+      description: Retrieve information about the current user.
+      responses:
+        '200':
+          description: User information retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  username:
+                    type: string
+                    example: johndoe
+                  email:
+                    type: string
+                    example: johndoe@example.com
+        '401':
+          description: Unauthorized.
+
+  /check_login:
+    get:
+      summary: 로그인 확인
+      description: Check if the user is logged in.
+      responses:
+        '200':
+          description: User is logged in.
+        '401':
+          description: User is not logged in.
+
+  /wines:
+    get:
+      summary: 와인 목록 검색
+      description: Retrieve a list of wines.
+      responses:
+        '200':
+          description: A list of wines.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    eng_name:
+                      type: string
+                      example: Chateau Margaux
+                    kor_name:
+                      type: string
+                      example: 샤토 마고
+                    type:
+                      type: string
+                      example: Red
+                    rating:
+                      type: number
+                      format: float
+                      example: 4.8
+
+  /wine/{eng_name}:
+    get:
+      summary: Get wine details
+      description: Retrieve detailed information about a specific wine.
+      parameters:
+        - name: wineName
+          in: path
+          required: true
+          description: The English name of the wine.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  eng_name:
+                    type: string
+                    example: Chateau Margaux
+                  kor_name:
+                    type: string
+                    example: 샤토 마고
+                  type:
+                    type: string
+                    example: Red
+                  country:
+                    type: string
+                    example: France
+                  region:
+                    type: string
+                    example: Bordeaux
+                  winery:
+                    type: string
+                    example: Chateau Margaux Winery
+                  grape:
+                    type: string
+                    example: Cabernet Sauvignon
+                  rating:
+                    type: number
+                    format: float
+                    example: 4.8
+                  price:
+                    type: integer
+                    example: 500000
+                  pairing:
+                    type: string
+                    example: 스테이크, 치즈
+                  aroma:
+                    type: string
+                    example: 블랙베리, 바닐라
+                  alcohol_content:
+                    type: number
+                    format: float
+                    example: 13.5
+                  sweetness:
+                    type: string
+                    example: Medium
+                  acidity:
+                    type: string
+                    example: High
+                  body:
+                    type: string
+                    example: Full
+                  tannin:
+                    type: string
+                    example: High
+                  vintage:
+                    type: integer
+                    example: 2015
+                  reviews:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: integer
+                          example: 1
+                        user:
+                          type: string
+                          example: John Doe
+                        comment:
+                          type: string
+                          example: 환상적인 와인입니다. 바디감과 향이 뛰어납니다!
+                        rating:
+                          type: number
+                          format: float
+                          example: 5
+                        date:
+                          type: string
+                          format: date
+                          example: 2024-11-01
+        '404':
+          description: Wine not found
+        '500':
+          description: Server error
+
+
+    post:
+      summary: 특정 와인 리뷰 작성
+      description: Submit a review for a specific wine.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wineId:
+                  type: integer
+                  example: 1
+                rating:
+                  type: number
+                  format: float
+                  example: 4.5
+                comment:
+                  type: string
+                  example: 특별한 날에 어울리는 와인입니다.
+      responses:
+        '201':
+          description: Review successfully submitted.
+        '400':
+          description: Invalid input.
+  /reviews:
+    post:
+      summary: Submit a review
+      description: Submit a review for a specific wine.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                wineName:
+                  type: string
+                  example: Chateau Margaux
+                reviewer:
+                  type: string
+                  example: John Doe
+                score:
+                  type: number
+                  format: float
+                  example: 5
+                comment:
+                  type: string
+                  example: 훌륭한 와인입니다. 추천합니다.
+      responses:
+        '201':
+          description: Review submitted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    example: 4
+                  wineName:
+                    type: string
+                    example: Chateau Margaux
+                  reviewer:
+                    type: string
+                    example: John Doe
+                  score:
+                    type: number
+                    format: float
+                    example: 5
+                  comment:
+                    type: string
+                    example: 훌륭한 와인입니다. 추천합니다.
+                  date:
+                    type: string
+                    format: date
+                    example: 2024-11-25
+        '400':
+          description: Invalid input
+        '500':
+          description: Server error
+
+  /reviews/me:
+    get:
+      summary: 내 리뷰 보기
+      description: Retrieve reviews written by the current user.
+      responses:
+        '200':
+          description: User's reviews retrieved successfully.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    wine:
+                      type: string
+                      example: Chateau Margaux
+                    rating:
+                      type: number
+                      format: float
+                      example: 5
+                    comment:
+                      type: string
+                      example: 환상적인 와인입니다.
+  
+  

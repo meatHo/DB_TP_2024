@@ -51,6 +51,7 @@ const App = () => {
           <Route path="/reviews" element={<MyReviews />} />
           <Route path="/info" element={<MyInfo />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/wine/:wineName" element={<WineInfo />} />
         </Routes>
       </Container>
     </Router>
