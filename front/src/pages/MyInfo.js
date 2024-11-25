@@ -52,9 +52,7 @@ const MyInfo = () => {
     }
   }, [navigate]);*/
 
-  const handleEditInfo = () => {
-    navigate('/edit_info');
-  };
+
 
   if (!userInfo) {
     return <LoadingMessage>로딩 중...</LoadingMessage>;
@@ -81,7 +79,6 @@ const MyInfo = () => {
           <Value>{userInfo.email}</Value>
         </InfoRow>
       </InfoContainer>
-      <EditButton onClick={handleEditInfo}>정보 변경</EditButton>
     </Container>
   );
 };

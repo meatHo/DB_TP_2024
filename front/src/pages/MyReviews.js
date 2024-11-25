@@ -36,7 +36,7 @@ const MyReviews = () => {
 
         fetchReviews();
     }, [navigate]);
-
+  
     //테스트 코드
     /* useEffect(() => {
         // Mock 데이터 로드
@@ -88,7 +88,7 @@ const MyReviews = () => {
                         <WineName>{review.wineName}</WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>
-                            <Timestamp>{new Date(review.timestamp).toLocaleDateString()}</Timestamp>
+                            <Date>{review.date}</Date>
                         </ReviewDetails>
                         <ReviewContent>{review.content}</ReviewContent>
                     </ReviewCard>
@@ -154,7 +154,7 @@ const Rating = styled.div`
   color: #6c757d;
 `;
 
-const Timestamp = styled.div`
+const Date = styled.div`
   font-size: 14px;
   color: #6c757d;
 `;
