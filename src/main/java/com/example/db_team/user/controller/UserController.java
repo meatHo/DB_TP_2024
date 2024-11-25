@@ -62,4 +62,7 @@ public class UserController implements UserControllerDocs {
         return userService.getUserInfo(userId);
     }
 
+//    @GetMapping("/check_login")
+//    public ResponseEntity<String> checkLogin(HttpSession session) {}
+
 }
