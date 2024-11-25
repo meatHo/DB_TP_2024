@@ -8,8 +8,8 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [originFilter, setOriginFilter] = useState('');
   const [regionFilter, setRegionFilter] = useState('');
-  const [winetypeFilter, setWineTypeFilter] = useState('');
-  const [grapetypeFilter, setGrapeTypeFilter] = useState('');
+  const [typeFilter, setTypeFilter] = useState('');
+  const [grapeNameFilter, setGrapeNameFilter] = useState('');
   const [priceRange, setPriceRange] = useState([0, 500000]); // 초기값을 최대 범위로 설정
   const [applyPriceFilter, setApplyPriceFilter] = useState(false); // 가격 필터 적용 여부
   const navigate = useNavigate();
@@ -39,8 +39,8 @@ const Home = () => {
       q: searchTerm,
       origin: originFilter,
       region: regionFilter,
-      winetype: winetypeFilter,
-      grapetype: grapetypeFilter,
+      type: typeFilter,
+      grapeName: grapeNameFilter,
       ...(applyPriceFilter && { minPrice: priceRange[0], maxPrice: priceRange[1] }),
     };
     navigate(`/search?${new URLSearchParams(query).toString()}`);
@@ -54,11 +54,11 @@ const Home = () => {
     setRegionFilter(e.target.value);
   };
 
-  const handleWineTypeChange = (e) => {
-    setWineTypeFilter(e.target.value);
+  const handletypeChange = (e) => {
+    setTypeFilter(e.target.value);
   };
-  const handleGrapeTypeChange = (e) => {
-    setGrapeTypeFilter(e.target.value);
+  const handleGrapeNameChange = (e) => {
+    setGrapeNameFilter(e.target.value);
   };
 
 
@@ -112,7 +112,7 @@ const Home = () => {
 
         {/* 와인 종류 필터 */}
         <FilterGroup>
-          <FilterSelect value={winetypeFilter} onChange={handleWineTypeChange}>
+          <FilterSelect value={typeFilter} onChange={handletypeChange}>
             <option value="" disabled>와인 종류</option> {/* 기본값으로 선택 불가 */}
             <option value="Sparkling">스파클링 와인</option>
             <option value="Red">레드 와인</option>
@@ -122,7 +122,7 @@ const Home = () => {
 
         {/* 포도 종류 필터 */}
         <FilterGroup>
-          <FilterSelect value={grapetypeFilter} onChange={handleGrapeTypeChange}>
+          <FilterSelect value={grapeNameFilter} onChange={handleGrapeNameChange}>
             <option value="" disabled>포도 종류</option> {/* 기본값으로 선택 불가 */}
             <option value="Cabernet Sauvignon">카베르네 소비뇽</option>
             <option value="Pinot Noir">피노 누아</option>

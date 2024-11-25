@@ -13,8 +13,8 @@ const SearchResult = () => {
   const [searchTerm, setSearchTerm] = useState(queryParams.get('q') || '');
   const [originFilter, setOriginFilter] = useState(queryParams.get('origin') || '');
   const [regionFilter, setRegionFilter] = useState(queryParams.get('region') || '');
-  const [winetypeFilter, setWineTypeFilter] = useState(queryParams.get('winetype') || '');
-  const [grapetypeFilter, setGrapeTypeFilter] = useState(queryParams.get('grapetype') || '');
+  const [typeFilter, setTypeFilter] = useState(queryParams.get('type') || '');
+  const [grapeNameFilter, setGrapeNameFilter] = useState(queryParams.get('grapeName') || '');
   const [results, setResults] = useState([]); // 검색 결과 상태
 
   const regionsByCountry = {
@@ -35,8 +35,8 @@ const SearchResult = () => {
       q: searchTerm,
       origin: originFilter,
       region: regionFilter,
-      winetype: winetypeFilter,
-      grapetype: grapetypeFilter,
+      type: typeFilter,
+      grapeName: grapeNameFilter,
     };
     navigate(`/search?${new URLSearchParams(query).toString()}`);
   };
@@ -52,8 +52,8 @@ const SearchResult = () => {
           q: searchTerm,
           origin: originFilter,
           region: regionFilter,
-          winetype: winetypeFilter,
-          grapetype: grapetypeFilter,
+          type: typeFilter,
+          grapeName: grapeNameFilter,
         },
       });
       setResults(response.data); // 서버로부터 받은 데이터를 검색 결과로 설정
@@ -77,7 +77,7 @@ const SearchResult = () => {
 
   useEffect(() => {
     fetchResults();
-  }, [searchTerm, originFilter, regionFilter, winetypeFilter, grapetypeFilter]);
+  }, [searchTerm, originFilter, regionFilter, typeFilter, grapeNameFilter]);
 
   /* 
     // 테스트
@@ -153,7 +153,7 @@ const SearchResult = () => {
         </FilterGroup>
 
         <FilterGroup>
-          <FilterSelect value={winetypeFilter} onChange={(e) => setWineTypeFilter(e.target.value)}>
+          <FilterSelect value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
             <option value="" disabled>와인 종류</option>
             <option value="Sparkling">스파클링 와인</option>
             <option value="Red">레드 와인</option>
@@ -162,7 +162,7 @@ const SearchResult = () => {
         </FilterGroup>
 
         <FilterGroup>
-          <FilterSelect value={grapetypeFilter} onChange={(e) => setGrapeTypeFilter(e.target.value)}>
+          <FilterSelect value={grapeNameFilter} onChange={(e) => setGrapeNameFilter(e.target.value)}>
             <option value="" disabled>포도 종류</option>
             <option value="Cabernet Sauvignon">카베르네 소비뇽</option>
             <option value="Pinot Noir">피노 누아</option>

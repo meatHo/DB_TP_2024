@@ -50,33 +50,36 @@ const MyReviews = () => {
         fetchReviews();
     }, [navigate]);
 
-    //테스트 코드
+    // 테스트 코드
     /* useEffect(() => {
         // Mock 데이터 로드
         const mockReviews = [
             {
                 loginId: 1,
-                wineName: 'Chardonnay',
+                kor_wine: '샤르도네',
+                eng_wine: 'Chardonnay',
                 rating: 5,
-                date: '2024-11-20T14:00:00',
+                date: '2024-11-20',
                 content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
             },
             {
                 loginId: 2,
-                wineName: 'Merlot',
+                kor_wine: '메를로',
+                eng_wine: 'Merlot',
                 rating: 4,
-                date: '2024-11-18T12:30:00',
+                date: '2024-11-18',
                 content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
             },
             {
                 loginId: 3,
-                wineName: 'Cabernet Sauvignon',
+                kor_wine: '카베르네 소비뇽',
+                eng_wine: 'Cabernet Sauvignon',
                 rating: 4.5,
-                date: '2024-11-19T15:00:00',
+                date: '2024-11-19',
                 content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
             },
         ];
-
+    
         // 로딩 시뮬레이션
         setTimeout(() => {
             setReviews(mockReviews); // Mock 데이터를 상태로 설정
@@ -98,7 +101,10 @@ const MyReviews = () => {
             <ReviewsContainer>
                 {reviews.map((review) => (
                     <ReviewCard key={review.loginId}>
-                        <WineName>{review.wineName}</WineName>
+                        <WineName>
+                            {review.kor_wine}
+                            <WineEnglishName>{review.eng_wine}</WineEnglishName>
+                        </WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>
                             <Date>{review.date}</Date>
@@ -188,4 +194,10 @@ const NoReviewsMessage = styled.div`
   margin-top: 50px;
   color: #555;
   text-align: center;
+`;
+
+const WineEnglishName = styled.div`
+  font-size: 14px;
+  color: #888;
+  margin-top: 5px;
 `;
