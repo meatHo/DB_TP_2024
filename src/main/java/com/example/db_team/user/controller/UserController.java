@@ -1,7 +1,7 @@
 package com.example.db_team.user.controller;
 
 import com.example.db_team.user.UserControllerDocs;
-import com.example.db_team.user.dto.UserInfoResponse;
+import com.example.db_team.user.domain.User;
 import com.example.db_team.user.dto.UserLoginRequest;
 import com.example.db_team.user.dto.UserLoginResponse;
 import com.example.db_team.user.dto.UserSignUpRequest;
@@ -54,15 +54,16 @@ public class UserController implements UserControllerDocs {
     }
 
     @GetMapping("/user_info")
-    public UserInfoResponse getUserInfo(HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if(userId == null) {
-            throw new RuntimeException("User not logged in!");
+    public ResponseEntity<User> getUserInfo(HttpSession session) {
+        try {
+            Long userId = (Long) session.getAttribute("userId");
+            if (userId == null) {
+                throw new RuntimeException("User not logged in!");
+            }
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(userService.getUserInfo(userId));
+        } catch(RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
-        return userService.getUserInfo(userId);
     }
-
-//    @GetMapping("/check_login")
-//    public ResponseEntity<String> checkLogin(HttpSession session) {}
-
 }

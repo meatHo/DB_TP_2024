@@ -46,8 +46,8 @@ const MyInfo = () => {
     fetchUserInfo();
   }, [navigate]);
 
-  /* 
-    //테스트 코드   
+  /*
+    //테스트 코드
     useEffect(() => {
     // 로그인 상태와 사용자 정보를 localStorage에서 확인
     const isLoggedIn = localStorage.getItem('isLoggedIn');
@@ -55,11 +55,11 @@ const MyInfo = () => {
       alert('로그인이 필요합니다.');
       navigate('/login'); // 로그인 페이지로 리다이렉트
       return;
-    } 
- 
+    }
+
     // localStorage에서 사용자 정보 불러오기
     const storedUserInfo = localStorage.getItem('userInfo');
-    if (storedUserInfo) 
+    if (storedUserInfo)
       setUserInfo(JSON.parse(storedUserInfo)); // JSON 문자열을 객체로 변환하여 저장
     }
   }, [navigate]);*/

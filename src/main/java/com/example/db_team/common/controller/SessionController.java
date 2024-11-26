@@ -1,4 +1,4 @@
-package com.example.db_team.user.controller;
+package com.example.db_team.common.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class SessionController {
     @GetMapping("/check_login")
     public ResponseEntity<Void> checkLoginStatus(HttpSession session) {
         if (session.getAttribute("userId") != null) {
-            return ResponseEntity.ok().build(); // 세션에 userId가 있으면 200 OK
+            return ResponseEntity.status(HttpStatus.OK).build(); // 세션에 userId가 있으면 200 OK
         } else {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build(); // 로그인되지 않은 경우 401
         }
