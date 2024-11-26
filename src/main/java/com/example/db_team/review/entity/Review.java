@@ -18,7 +18,7 @@ public class Review {
     private long reviewId;
     @ManyToOne
     @JoinColumn(name = "user_id")
-    private User User;
+    private User user;
     @ManyToOne
     @JoinColumn(name = "wine_id")
     private Wine wine;

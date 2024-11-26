@@ -40,7 +40,7 @@ public class Wine {
     @Column(name = "price")
     private int price;
     @ManyToOne
-    @JoinColumn(name = "grape_name")
+    @JoinColumn(name = "grape_id")
     private Grape grape;
     @ManyToOne
     @JoinColumn(name = "country")
