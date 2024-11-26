@@ -48,7 +48,7 @@ public class UserService {
                 .orElseThrow(() -> new RuntimeException("로그인 실패"));
     }
 
-    public UserInfoResponse getUserInfo(Long userId) {
+    public User getUserInfo(Long userId) {
         Optional<User> result = userRepository.findById(userId);
         User user;
         if(result.isPresent()) {
@@ -57,11 +57,6 @@ public class UserService {
             throw new RuntimeException("User not found!");
         }
 
-        return new UserInfoResponse(
-                user.getLoginId(),
-                user.getUserName(),
-                user.getEmail(),
-                user.getPhoneNumber()
-        );
+        return user;
     }
 }

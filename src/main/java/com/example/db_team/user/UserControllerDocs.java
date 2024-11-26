@@ -1,5 +1,6 @@
 package com.example.db_team.user;
 
+import com.example.db_team.user.domain.User;
 import com.example.db_team.user.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -40,9 +41,8 @@ public interface UserControllerDocs {
     @Operation(summary = "유저 정보 조회", description = "유저 정보를 조회한다.")
     @ApiResponse(responseCode = "200", description = "유저 정보 조회 성공", useReturnTypeSchema = true)
     @ApiResponse(responseCode = "400", description = "유저 정보 조회 실패")
-    UserInfoResponse getUserInfo(
+    ResponseEntity<User> getUserInfo(
             @Schema(description = "HTTP session to identify the logged-in user. The session should contain the user ID.")
             HttpSession session
     );
-
 }
