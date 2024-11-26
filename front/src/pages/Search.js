@@ -13,8 +13,8 @@ const SearchResult = () => {
   const [searchTerm, setSearchTerm] = useState(queryParams.get('q') || '');
   const [originFilter, setOriginFilter] = useState(queryParams.get('origin') || '');
   const [regionFilter, setRegionFilter] = useState(queryParams.get('region') || '');
-  const [winetypeFilter, setWineTypeFilter] = useState(queryParams.get('winetype') || '');
-  const [grapetypeFilter, setGrapeTypeFilter] = useState(queryParams.get('grapetype') || '');
+  const [typeFilter, setTypeFilter] = useState(queryParams.get('type') || '');
+  const [grapeNameFilter, setGrapeNameFilter] = useState(queryParams.get('grapeName') || '');
   const [results, setResults] = useState([]); // 검색 결과 상태
 
   const regionsByCountry = {
@@ -35,14 +35,15 @@ const SearchResult = () => {
       q: searchTerm,
       origin: originFilter,
       region: regionFilter,
-      winetype: winetypeFilter,
-      grapetype: grapetypeFilter,
+      type: typeFilter,
+      grapeName: grapeNameFilter,
     };
     navigate(`/search?${new URLSearchParams(query).toString()}`);
   };
 
 
 
+  // 서버로부터 검색 결과 데이터를 가져오는 함수
   // 서버로부터 검색 결과 데이터를 가져오는 함수
   const fetchResults = async () => {
     try {
@@ -51,19 +52,32 @@ const SearchResult = () => {
           q: searchTerm,
           origin: originFilter,
           region: regionFilter,
-          winetype: winetypeFilter,
-          grapetype: grapetypeFilter,
+          type: typeFilter,
+          grapeName: grapeNameFilter,
         },
       });
       setResults(response.data); // 서버로부터 받은 데이터를 검색 결과로 설정
     } catch (error) {
-      console.error('검색 결과 요청 실패:', error);
+      if (error.response) {
+        // 서버가 응답했지만 상태 코드가 2xx가 아닌 경우
+        console.error('검색 결과 요청 실패 상태: ', error.response.status);
+        console.error('검색 결과 요청 실패 응답 데이터: ', error.response.data);
+        alert('검색 결과를 불러오는 데 실패했습니다. 입력 조건을 확인하고 다시 시도해 주세요.');
+      } else if (error.request) {
+        // 서버에 요청했지만 응답이 없는 경우 (네트워크 문제)
+        console.error('서버 응답 없음: ', error.request);
+        alert('서버와의 연결에 문제가 발생했습니다. 네트워크를 확인하고 다시 시도해 주세요.');
+      } else {
+        // 기타 에러 (코드 오류 등)
+        console.error('검색 결과 요청 중 에러: ', error.message);
+        alert('알 수 없는 문제가 발생했습니다. 다시 시도해 주세요.');
+      }
     }
   };
 
   useEffect(() => {
     fetchResults();
-  }, [searchTerm, originFilter, regionFilter, winetypeFilter, grapetypeFilter]);
+  }, [searchTerm, originFilter, regionFilter, typeFilter, grapeNameFilter]);
 
   /* 
     // 테스트
@@ -139,7 +153,7 @@ const SearchResult = () => {
         </FilterGroup>
 
         <FilterGroup>
-          <FilterSelect value={winetypeFilter} onChange={(e) => setWineTypeFilter(e.target.value)}>
+          <FilterSelect value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
             <option value="" disabled>와인 종류</option>
             <option value="Sparkling">스파클링 와인</option>
             <option value="Red">레드 와인</option>
@@ -148,7 +162,7 @@ const SearchResult = () => {
         </FilterGroup>
 
         <FilterGroup>
-          <FilterSelect value={grapetypeFilter} onChange={(e) => setGrapeTypeFilter(e.target.value)}>
+          <FilterSelect value={grapeNameFilter} onChange={(e) => setGrapeNameFilter(e.target.value)}>
             <option value="" disabled>포도 종류</option>
             <option value="Cabernet Sauvignon">카베르네 소비뇽</option>
             <option value="Pinot Noir">피노 누아</option>
