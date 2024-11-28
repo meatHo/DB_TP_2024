@@ -6,9 +6,9 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class WineSpecifications {
 
-    public static Specification<Wine> hasSearchTerm(String searchTerm) {
-        return (root, query, cb) -> (searchTerm == null || searchTerm.isEmpty())
-                ? null : cb.equal(root.get("eng_name"), "%" + searchTerm + "%");
+    public static Specification<Wine> hasQ(String q) {
+        return (root, query, cb) -> (q == null || q.isEmpty())
+                ? null : cb.like(root.get("engName"), "%" + q.toLowerCase() + "%");
     }
     public static Specification<Wine> hasType(String type) {
         return (root, query, cb) -> (type == null || type.isEmpty())

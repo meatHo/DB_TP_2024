@@ -25,36 +25,35 @@ public class WineService {
 
     public List<Wine> getWinesByParams(Map<String, String> params) {
 
-        log.debug(params.toString());
+        log.info(params.toString());
 
         Grape grape = grapeRepository.findByGrapeName(params.get("grapeName"))
                         .orElse(null);
 
         List<Wine> wineList = new ArrayList<Wine>(wineRepository.findAll(
-                Specification.where(WineSpecifications.hasSearchTerm(params.get("searchTerm")))
+                Specification.where(WineSpecifications.hasQ(params.get("q")))
                         .and(WineSpecifications.hasType(params.get("type")))
                         .and(WineSpecifications.hasGrape(grape))
             )
         );
 
-        log.info(wineList.toString());
+        log.info("wine 테이블 검색: {}", wineList.toString());
 
         producerRepository.findByRegion(params.get("region"))
                 .flatMap(wineRepository::findByProducer)
                 .ifPresent(wineList::retainAll);
 
-        log.info(producerRepository.findByRegion(params.get("region"))
-                .flatMap(wineRepository::findByProducer).toString());
-
-        log.info(wineList.toString());
+        log.info("producer 테이블/지역 검색: {}", wineList.toString());
 
         producerRepository.findByOrigin(params.get("origin"))
+            .filter(producers -> !producers.isEmpty())
             .ifPresent(producers -> {
+                        log.info("빈문자열 producer가 존재함");
                         List<Wine> tempList = new ArrayList<>();
                         producers.forEach(producer -> {
                                 tempList.addAll(wineRepository.findByProducer(producer)
                                                     .orElse(Collections.emptyList()));
-                                log.info(wineRepository.findByProducer(producer).toString());
+                                log.info("producer 테이블/나라 검색: {}", wineRepository.findByProducer(producer).toString());
                                 log.info(tempList.toString());
                             }
                         );
@@ -64,7 +63,7 @@ public class WineService {
 
         log.info(producerRepository.findByOrigin(params.get("origin")).toString());
 
-        log.info(wineList.toString());
+        log.info("와인 목록: {}", wineList.toString());
 
         return new ArrayList<>(wineList);
     }
