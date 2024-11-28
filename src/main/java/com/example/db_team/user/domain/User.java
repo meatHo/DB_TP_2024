@@ -1,12 +1,7 @@
 package com.example.db_team.user.domain;
 
-import com.example.db_team.entity.Favorite;
-import com.example.db_team.entity.Pairing;
-import com.example.db_team.review.entity.Review;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.util.List;
 
 @Data
 @Entity
@@ -29,11 +24,6 @@ public class User {
     private String phoneNumber;
     @Column(name = "password")
     private String password;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Review> reviews;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Favorite> favorites;
 
     public User(Long userId) {
         this.userId = userId;

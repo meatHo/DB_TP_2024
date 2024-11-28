@@ -1,4 +1,4 @@
-package com.example.db_team.common.controller;
+package com.example.db_team.controller;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;

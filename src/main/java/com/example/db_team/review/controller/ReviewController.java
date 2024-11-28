@@ -22,13 +22,13 @@ public class ReviewController {
     private final ReviewService reviewService;
 
     @GetMapping("/me")
-    public ResponseEntity<List<Review>> me(HttpSession session) {
+    public ResponseEntity<List<Review>> getMyReviews(HttpSession session) {
         Long userId = (Long) session.getAttribute("userId");
         if(userId == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
                     .body(List.of());
         }
         return ResponseEntity.status(HttpStatus.OK)
-                .body(reviewService.findReviewsByUserId(userId));
+                .body(reviewService.getReviewsByUserId(userId));
     }
 }

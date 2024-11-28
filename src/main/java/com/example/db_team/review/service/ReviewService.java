@@ -16,11 +16,7 @@ public class ReviewService {
     private final ReviewRepository reviewRepository;
     private final UserRepository userRepository;
 
-    public List<Review> findAll() {
-        return reviewRepository.findAll();
-    }
-
-    public List<Review> findReviewsByUserId(long userId) {
+    public List<Review> getReviewsByUserId(long userId) {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("User not found with id: " + userId));
 
