@@ -5,9 +5,8 @@ import com.example.db_team.wine.entity.Wine;
 import jakarta.persistence.*;
 import lombok.*;
 
+@Data
 @Entity
-@Getter
-@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -28,4 +27,6 @@ public class Favorite {
     @ManyToOne
     @JoinColumn(name = "wine_id")
     private Wine wine;
+
+
 }

@@ -10,18 +10,24 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"user_id", "wine_id"})
+})
 public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "review_id")
     private long reviewId;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
     @ManyToOne
     @JoinColumn(name = "wine_id")
     private Wine wine;
+
     @Column(name = "rating")
     private float rating;
     @Column(name = "comment")
