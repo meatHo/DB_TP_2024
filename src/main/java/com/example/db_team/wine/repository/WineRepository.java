@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface WineRepository extends JpaRepository<Wine, Long>, JpaSpecificationExecutor<Wine> {
 
     Optional<List<Wine>> findByProducer(Producer producer);
+
+    Optional<Wine> findByEngName(String engName);
 }

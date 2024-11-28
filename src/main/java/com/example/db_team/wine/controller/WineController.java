@@ -20,15 +20,32 @@ public class WineController {
     @GetMapping
     public ResponseEntity<List<Wine>> getWineList(@RequestParam Map<String, String> params) {
 
-        List<Wine> wines = wineService.getWinesByParams(params);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(wineService.getWinesByParams(params));
+    }
 
-        return ResponseEntity.status(HttpStatus.OK).body(wines);
+    @GetMapping("/{wineName}")
+    public ResponseEntity<Wine> getWine(@PathVariable String engName) {
+
+        try {
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(wineService.getWineByEngName(engName));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body(null);
+        }
+
     }
 
     @PostMapping("/init-wines")
     public String initializeWines() {
 
-        wineService.initializeWines();
-        return "Wines initialized successfully!";
+        try {
+            wineService.initializeWines();
+            return "Wines initialized successfully!";
+        } catch (Exception e) {
+            return "Wines could not be initialized!";
+        }
+
     }
 }
