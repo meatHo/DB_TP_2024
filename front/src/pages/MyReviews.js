@@ -102,8 +102,8 @@ const MyReviews = () => {
                 {reviews.map((review) => (
                     <ReviewCard key={review.loginId}>
                         <WineName>
-                            {review.korWine}
-                            <WineEnglishName>{review.engWine}</WineEnglishName>
+                            {review.engName}
+                            <WineEnglishName>{review.korName}</WineEnglishName>
                         </WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>

@@ -88,21 +88,21 @@ const SearchResult = () => {
           engName: 'Polperro and Even Keel Wines',
           korName: '폴페로 앤 이븐 킬 와인',
           type: '레드',
-          country: '프랑스',
+          origin: '프랑스',
           rating: 4.3,
         },
         {
           engName: 'Castello di Ama',
           korName: '카스텔로 디 아마',
           type: '레드',
-          country: '이탈리아',
+          origin: '이탈리아',
           rating: 4.5,
         },
         {
           engName: 'Bodegas Vega Sicilia',
           korName: '베가 시실리아 와인',
           type: '화이트',
-          country: '스페인',
+          origin: '스페인',
           rating: 4.7,
         },
       ];
@@ -188,7 +188,7 @@ const SearchResult = () => {
             <ResultContent>
               {/*WineTitle 클릭하면 상세페이지(WineInfo 실행)로 이동*/}
               <WineTitle
-                onClick={() => navigate(`/wine/${result.engName}`)}
+                onClick={() => navigate(`/wines/${result.engName}`)}
                 role="button"
               >
                 {result.engName}
@@ -196,7 +196,7 @@ const SearchResult = () => {
               <WineSubtitle>{result.korName}</WineSubtitle>
               <WineInfo>
                 <WineType type={result.type}>{result.type}</WineType> {/* 와인 종류에 따라 색상 변경 */}
-                <Country>{result.country}</Country>
+                <Country>{result.origin}</Country>
                 <Rating>⭐ {result.rating}</Rating>
               </WineInfo>
             </ResultContent>
