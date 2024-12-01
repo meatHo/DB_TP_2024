@@ -27,10 +27,10 @@ const Home = () => {
     Spain: ['Rioja', 'Priorat', 'Ribera del Duero', 'Rías Baixas'],
     Portugal: ['Douro', 'Alentejo', 'Dão'],
     Germany: ['Mosel', 'Rheingau', 'Pfalz'],
-    US: ['Napa Valley', 'Sonoma', 'Willamette Valley'],
+    USA: ['Napa Valley', 'Sonoma', 'Willamette Valley'],
     'New Zealand': ['Marlborough', 'Hawke\'s Bay'],
     Australia: ['Barossa Valley', 'Yarra Valley'],
-    Chile: ['Maipo Valley', 'Colchagua Valley'],
+    Chile: ['Maipo Valley', 'Colchagua Valley', 'Leyda Valley'],
     Argentina: ['Mendoza', 'Salta'],
   };
 
