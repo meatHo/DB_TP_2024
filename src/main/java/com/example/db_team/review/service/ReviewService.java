@@ -1,7 +1,7 @@
 package com.example.db_team.review.service;
 
-import com.example.db_team.review.entity.Review;
-import com.example.db_team.review.repository.ReviewRepository;
+import com.example.db_team.review.domain.Review;
+import com.example.db_team.review.domain.ReviewRepository;
 import com.example.db_team.user.domain.User;
 import com.example.db_team.user.domain.UserRepository;
 import lombok.RequiredArgsConstructor;

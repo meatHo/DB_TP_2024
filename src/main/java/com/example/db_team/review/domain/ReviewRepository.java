@@ -1,6 +1,5 @@
-package com.example.db_team.review.repository;
+package com.example.db_team.review.domain;
 
-import com.example.db_team.review.entity.Review;
 import com.example.db_team.user.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

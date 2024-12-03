@@ -1,9 +1,7 @@
 package com.example.db_team.review.controller;
 
-import com.example.db_team.review.entity.Review;
+import com.example.db_team.review.domain.Review;
 import com.example.db_team.review.service.ReviewService;
-import com.example.db_team.user.domain.User;
-import com.example.db_team.user.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

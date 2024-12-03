@@ -1,4 +1,4 @@
-package com.example.db_team.review.entity;
+package com.example.db_team.review.domain;
 
 import com.example.db_team.user.domain.User;
 import com.example.db_team.wine.entity.Wine;
