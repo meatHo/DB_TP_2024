@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
 import wineImage from '../assets/wine.svg';
-
+import { Range } from 'react-range';
 
 const SearchResult = () => {
   const navigate = useNavigate();
@@ -16,6 +16,9 @@ const SearchResult = () => {
   const [typeFilter, setTypeFilter] = useState(queryParams.get('type') || '');
   const [grapeNameFilter, setGrapeNameFilter] = useState(queryParams.get('grapeName') || '');
   const [results, setResults] = useState([]); // 검색 결과 상태
+
+  const [minPrice, setMinPrice] = useState(queryParams.get('minPrice') || 0);
+  const [maxPrice, setMaxPrice] = useState(queryParams.get('maxPrice') || 500000);
 
   const regionsByCountry = {
     France: ['Bordeaux', 'Burgundy', 'Champagne', 'Loire Valley', 'Rhône Valley'],
@@ -30,6 +33,11 @@ const SearchResult = () => {
     Argentina: ['Mendoza', 'Salta'],
   };
 
+  const handlePriceChange = (values) => {
+    setMinPrice(values[0]);
+    setMaxPrice(values[1]);
+  };
+
   const handleSearch = () => {
     const query = {
       q: searchTerm,
@@ -37,6 +45,8 @@ const SearchResult = () => {
       region: regionFilter,
       type: typeFilter,
       grapeName: grapeNameFilter,
+      minPrice,
+      maxPrice,
     };
     navigate(`/search?${new URLSearchParams(query).toString()}`);
   };
@@ -54,6 +64,8 @@ const SearchResult = () => {
           region: regionFilter,
           type: typeFilter,
           grapeName: grapeNameFilter,
+          minPrice, // 가격 필터 추가
+          maxPrice, // 가격 필터 추가
         },
       });
       setResults(response.data); // 서버로부터 받은 데이터를 검색 결과로 설정
@@ -179,6 +191,36 @@ const SearchResult = () => {
           </FilterSelect>
         </FilterGroup>
       </FilterContainer>
+
+      <PriceFilter>
+        <Range
+          step={1000}
+          min={0}
+          max={500000}
+          values={[minPrice, maxPrice]}
+          onChange={handlePriceChange}
+          renderTrack={({ props, children }) => (
+            <Track {...props}>
+              <TrackInner
+                style={{
+                  left: `${(minPrice / 500000) * 100}%`,
+                  width: `${((maxPrice - minPrice) / 500000) * 100}%`,
+                }}
+              />
+              {children}
+            </Track>
+          )}
+          renderThumb={({ props, index }) => (
+            <Thumb {...props}>
+              <ThumbLabel>₩{[minPrice, maxPrice][index].toLocaleString()}</ThumbLabel>
+            </Thumb>
+          )}
+        />
+        <PriceValues>
+          <PriceValue>₩{minPrice.toLocaleString()}</PriceValue>
+          <PriceValue>₩{maxPrice.toLocaleString()}</PriceValue>
+        </PriceValues>
+      </PriceFilter>
 
       {/* 검색 결과 리스트 */}
       <ResultList>
@@ -347,4 +389,61 @@ const Country = styled.span`
 const Rating = styled.span`
   font-size: 12px;
   color: #888;
+`;
+const PriceFilter = styled.div`
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 50px;
+`;
+
+const Track = styled.div`
+  height: 8px;
+  width: 300px;
+  background: #ddd;
+  border-radius: 4px;
+  position: relative;
+`;
+
+const TrackInner = styled.div`
+  height: 100%;
+  background: #c62828;
+  border-radius: 4px;
+  position: absolute;
+`;
+
+const Thumb = styled.div`
+  height: 24px;
+  width: 24px;
+  background-color: #fff;
+  border: 2px solid #c62828;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+`;
+
+const ThumbLabel = styled.div`
+  position: absolute;
+  top: -30px;
+  font-size: 14px;
+  color: #fff;
+  background: #c62828;
+  padding: 5px 8px;
+  border-radius: 4px;
+`;
+
+const PriceValues = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 300px;
+  margin-top: 10px;
+`;
+
+const PriceValue = styled.span`
+  font-size: 16px;
+  color: #333;
 `;
