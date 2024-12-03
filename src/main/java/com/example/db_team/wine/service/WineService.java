@@ -68,6 +68,12 @@ public class WineService {
         return new ArrayList<>(wineList);
     }
 
+    public Wine getWineByEngName(String engName) {
+
+        return wineRepository.findByEngName(engName)
+                .orElseThrow(() -> new RuntimeException("Wine not exist"));
+    }
+
     public void initializeWines() {
 
         List<Wine> wines = new ArrayList<>();

@@ -11,7 +11,8 @@ import lombok.*;
 public class Producer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "producer_id")
     private long producerId;
     @Column(name = "region", unique = true, nullable = false)
     private String region;

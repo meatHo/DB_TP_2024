@@ -10,16 +10,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "pairing", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"wine_name", "food"})
+        @UniqueConstraint(columnNames = {"wine", "food"})
 })
 public class Pairing {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long pairingId;
 
     @ManyToOne
-    @JoinColumn(name = "wine_name")
+    @JoinColumn(name = "wine_id")
     private Wine wine;
 
     @Column(name = "food")

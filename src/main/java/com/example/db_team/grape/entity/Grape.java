@@ -11,7 +11,7 @@ import lombok.*;
 public class Grape {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long grapeId;
     @Column(name = "grape_name", unique = true, nullable = false)
     private String grapeName;
