@@ -56,24 +56,24 @@ const MyReviews = () => {
         const mockReviews = [
             {
                 loginId: 1,
-                kor_wine: '샤르도네',
-                eng_wine: 'Chardonnay',
+                korName: '샤르도네',
+                engName: 'Chardonnay',
                 rating: 5,
                 date: '2024-11-20',
                 content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
             },
             {
                 loginId: 2,
-                kor_wine: '메를로',
-                eng_wine: 'Merlot',
+                korName: '메를로',
+                engName: 'Merlot',
                 rating: 4,
                 date: '2024-11-18',
                 content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
             },
             {
                 loginId: 3,
-                kor_wine: '카베르네 소비뇽',
-                eng_wine: 'Cabernet Sauvignon',
+                korName: '카베르네 소비뇽',
+                engName: 'Cabernet Sauvignon',
                 rating: 4.5,
                 date: '2024-11-19',
                 content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
@@ -102,8 +102,8 @@ const MyReviews = () => {
                 {reviews.map((review) => (
                     <ReviewCard key={review.loginId}>
                         <WineName>
-                            {review.kor_wine}
-                            <WineEnglishName>{review.eng_wine}</WineEnglishName>
+                            {review.engName}
+                            <WineEnglishName>{review.korName}</WineEnglishName>
                         </WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>

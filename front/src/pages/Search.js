@@ -23,10 +23,10 @@ const SearchResult = () => {
     Spain: ['Rioja', 'Priorat', 'Ribera del Duero', 'Rías Baixas'],
     Portugal: ['Douro', 'Alentejo', 'Dão'],
     Germany: ['Mosel', 'Rheingau', 'Pfalz'],
-    US: ['Napa Valley', 'Sonoma', 'Willamette Valley'],
+    USA: ['Napa Valley', 'Sonoma', 'Willamette Valley'],
     'New Zealand': ['Marlborough', 'Hawke\'s Bay'],
     Australia: ['Barossa Valley', 'Yarra Valley'],
-    Chile: ['Maipo Valley', 'Colchagua Valley'],
+    Chile: ['Maipo Valley', 'Colchagua Valley', 'Leyda Valley'],
     Argentina: ['Mendoza', 'Salta'],
   };
 
@@ -85,24 +85,24 @@ const SearchResult = () => {
       // Mock 데이터
       const mockResults = [
         {
-          eng_name: 'Polperro and Even Keel Wines',
-          kor_name: '폴페로 앤 이븐 킬 와인',
+          engName: 'Polperro and Even Keel Wines',
+          korName: '폴페로 앤 이븐 킬 와인',
           type: '레드',
-          country: '프랑스',
+          origin: '프랑스',
           rating: 4.3,
         },
         {
-          eng_name: 'Castello di Ama',
-          kor_name: '카스텔로 디 아마',
+          engName: 'Castello di Ama',
+          korName: '카스텔로 디 아마',
           type: '레드',
-          country: '이탈리아',
+          origin: '이탈리아',
           rating: 4.5,
         },
         {
-          eng_name: 'Bodegas Vega Sicilia',
-          kor_name: '베가 시실리아 와인',
+          engName: 'Bodegas Vega Sicilia',
+          korName: '베가 시실리아 와인',
           type: '화이트',
-          country: '스페인',
+          origin: '스페인',
           rating: 4.7,
         },
       ];
@@ -188,15 +188,15 @@ const SearchResult = () => {
             <ResultContent>
               {/*WineTitle 클릭하면 상세페이지(WineInfo 실행)로 이동*/}
               <WineTitle
-                onClick={() => navigate(`/wine/${result.eng_name}`)}
+                onClick={() => navigate(`/wines/${result.engName}`)}
                 role="button"
               >
-                {result.eng_name}
+                {result.engName}
               </WineTitle>
-              <WineSubtitle>{result.kor_name}</WineSubtitle>
+              <WineSubtitle>{result.korName}</WineSubtitle>
               <WineInfo>
                 <WineType type={result.type}>{result.type}</WineType> {/* 와인 종류에 따라 색상 변경 */}
-                <Country>{result.country}</Country>
+                <Country>{result.origin}</Country>
                 <Rating>⭐ {result.rating}</Rating>
               </WineInfo>
             </ResultContent>
