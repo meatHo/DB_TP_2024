@@ -8,6 +8,8 @@ import org.hibernate.annotations.Check;
 
 @Data
 @Entity
+@Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,4 +38,14 @@ public class Review {
     private String comment;
     @Column(name = "date")
     private String date;
+
+    @Builder
+    private Review(Long reviewId, User user, Wine wine, float rating, String comment, String date) {
+        this.reviewId = reviewId;
+        this.user = user;
+        this.wine = wine;
+        this.rating = rating;
+        this.comment = comment;
+        this.date = date;
+    }
 }

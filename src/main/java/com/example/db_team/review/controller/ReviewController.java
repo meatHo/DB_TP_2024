@@ -1,14 +1,14 @@
 package com.example.db_team.review.controller;
 
 import com.example.db_team.review.domain.Review;
+import com.example.db_team.review.dto.WineReviewRequest;
+import com.example.db_team.review.dto.WineReviewResponse;
 import com.example.db_team.review.service.ReviewService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -28,5 +28,16 @@ public class ReviewController {
         }
         return ResponseEntity.status(HttpStatus.OK)
                 .body(reviewService.getReviewsByUserId(userId));
+    }
+
+    @GetMapping("/{wineId}")
+    public ResponseEntity<List<WineReviewResponse>> getReviewsByWineId(@PathVariable Long wineId) {
+        List<WineReviewResponse> reviews = reviewService.getReviewsByWineId(wineId);
+        return ResponseEntity.ok(reviews);
+    }
+
+    @PostMapping("/{wineId}")
+    public WineReviewResponse createReview(@PathVariable Long wineId, @RequestBody WineReviewRequest request) {
+        return reviewService.createReview(wineId, request);
     }
 }
