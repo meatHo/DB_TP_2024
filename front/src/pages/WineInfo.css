@@ -1,59 +1,134 @@
-/* 전체 컨테이너 스타일 */
+/* 컨테이너 스타일 */
 .wine-info-container {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    width: 100vw; /* 뷰포트의 가로 길이 100% */
-    height: auto; /* 뷰포트의 세로 길이 100% */
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* 제목 스타일 */
-  .wine-info-container h1 {
-    font-size: 2rem;
-    color: #4a4a4a;
-    margin-bottom: 10px;
-  }
-  
-  .wine-info-container h2 {
-    font-size: 1.5rem;
-    color: #7d4cdb;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-  /* 텍스트 스타일 */
-  .wine-info-container p {
-    font-size: 1rem;
-    color: #333;
-    margin: 5px 0;
-  }
-  
-  /* 강조 텍스트 */
-  .wine-info-container p strong {
-    color: #7d4cdb;
-  }
-  
-  /* 가격 강조 */
-  .wine-info-container p:last-child {
-    font-weight: bold;
-    color: #d9534f;
-  }
-  
-  .review {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .review strong {
-    color: #7d4cdb;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 와인 제목 스타일 */
+.wine-info-container h1 {
+  font-size: 2.2em;
+  color: #8b0000; /* 진한 레드 색상 */
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+/* 부가 정보 제목 */
+.wine-info-container h2 {
+  font-size: 1.8em;
+  color: #555;
+  margin-top: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+/* 와인 상세 정보 텍스트 */
+.wine-info-container p {
+  font-size: 1em;
+  color: #0f0f0f !important; 
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+/* 강조 텍스트 */
+.wine-info-container p strong {
+  color: #8b4513; /* 갈색으로 강조 */
+}
+
+/* 리뷰 섹션 */
+.review {
+  padding: 15px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.review strong {
+  color: #2e8b57; /* 리뷰 작성자 이름: 녹색 */
+}
+
+.review p {
+  color: #444; /* 일반 리뷰 텍스트 색상 */
+}
+
+/* 리뷰 작성 폼 */
+form {
+  margin-top: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+/* 로딩 및 에러 메시지 */
+.wine-info-container p {
+  text-align: center;
+  color: #999;
+}
+
+/* 가격 텍스트 강조 */
+.wine-info-container p:nth-child(7) {
+  color: #b22222; /* 가격에 진한 빨간색 */
+  font-weight: bold;
+}
+
+/* 모바일 반응형 */
+@media (max-width: 768px) {
+  .wine-info-container {
+    padding: 15px;
   }
 
-  .last-element {
-    margin-bottom: 5rem; /* 10줄 정도의 여백 */
+  form input,
+  form textarea {
+    font-size: 0.85em;
   }
+
+  form button {
+    font-size: 0.9em;
+  }
+}
