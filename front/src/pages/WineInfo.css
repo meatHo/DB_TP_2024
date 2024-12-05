@@ -1,59 +1,235 @@
-/* 전체 컨테이너 스타일 */
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .wine-info-container {
-    font-family: 'Arial', sans-serif;
-    line-height: 1.6;
-    width: 100vw; /* 뷰포트의 가로 길이 100% */
-    height: auto; /* 뷰포트의 세로 길이 100% */
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* 제목 스타일 */
-  .wine-info-container h1 {
-    font-size: 2rem;
-    color: #4a4a4a;
-    margin-bottom: 10px;
-  }
-  
-  .wine-info-container h2 {
-    font-size: 1.5rem;
-    color: #7d4cdb;
-    margin-top: 20px;
-    margin-bottom: 10px;
-  }
-  
-  /* 텍스트 스타일 */
-  .wine-info-container p {
-    font-size: 1rem;
-    color: #333;
-    margin: 5px 0;
-  }
-  
-  /* 강조 텍스트 */
-  .wine-info-container p strong {
-    color: #7d4cdb;
-  }
-  
-  /* 가격 강조 */
-  .wine-info-container p:last-child {
-    font-weight: bold;
-    color: #d9534f;
-  }
-  
-  .review {
-    margin-bottom: 15px;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  .review strong {
-    color: #7d4cdb;
+  width: 60%;
+  /* 화면의 90%를 사용 */
+
+  /* 최대 폭 제한 해제 */
+  margin: 0 auto;
+  /* 중앙 정렬 */
+  padding: 20px 5%;
+  /* 좌우 패딩 축소 */
+}
+
+.wine-info-container h1 {
+  font-size: 2.2em;
+  color: #8b0000;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.wine-info-container h2 {
+  font-size: 1.8em;
+  color: #555;
+  margin-top: 20px;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 5px;
+}
+
+.wine-info-container p {
+  font-size: 1em;
+  color: #0f0f0f !important;
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+
+.wine-info-container p strong {
+  color: #8b4513;
+}
+
+.review {
+  padding: 15px;
+  margin: 15px 0;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.review strong {
+  color: #2e8b57;
+}
+
+.review p {
+  color: #444;
+}
+
+form {
+  margin-top: 20px;
+}
+
+form div {
+  margin-bottom: 15px;
+}
+
+form label {
+  display: block;
+  font-size: 1em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+form input,
+form textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 0.9em;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fafafa;
+}
+
+form input:focus,
+form textarea:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+form button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+form button:hover {
+  background-color: #0056b3;
+}
+
+.wine-info-container p {
+  text-align: center;
+  color: #999;
+}
+
+.wine-info-container p:nth-child(7) {
+  color: #b22222;
+  font-weight: bold;
+}
+
+@media (max-width: 768px) {
+  .wine-info-container {
+    padding: 15px;
   }
 
-  .last-element {
-    margin-bottom: 5rem; /* 10줄 정도의 여백 */
+  form input,
+  form textarea {
+    font-size: 0.85em;
   }
+
+  form button {
+    font-size: 0.9em;
+  }
+}
+
+.wine-details {
+  margin-top: 20px;
+}
+
+.reviews {
+  margin-top: 30px;
+}
+
+.review-card {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+.review-form {
+  margin-top: 30px;
+}
+
+.review-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.review-form input,
+.review-form textarea {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.review-form button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.review-form button:hover {
+  background-color: #0056b3;
+}
+
+.wine-header {
+  display: flex;
+  flex-wrap: wrap;
+  /* 작은 화면에서도 잘 정렬되도록 설정 */
+  align-items: center;
+  /* 수직 가운데 정렬 */
+  justify-content: space-between;
+  /* 양쪽 끝으로 정렬 */
+  gap: 20px;
+  /* 아이템 간 간격 */
+  margin-bottom: 30px;
+  /* 아래 내용과의 간격 추가 */
+  padding: 10px 0;
+  /* 위아래 패딩 추가 */
+  border-bottom: 2px solid #ddd;
+  /* 하단 경계선 추가 */
+}
+
+.wine-image img {
+  width: 200px;
+  /* 이미지 크기 설정 */
+  height: auto;
+  border-radius: 8px;
+  /* 이미지 둥근 모서리 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* 이미지 그림자 */
+}
+
+.wine-basic-info {
+  flex: 1;
+  /* 남은 공간을 텍스트가 차지하도록 설정 */
+  text-align: left;
+}
+
+.wine-basic-info h1 {
+  font-size: 2.4em;
+  color: #8b0000;
+  /* 진한 빨간색 */
+  margin-bottom: 10px;
+}
+
+.wine-basic-info p {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 5px;
+  line-height: 1.4;
+  /* 가독성을 위한 줄 간격 */
+}
+
+.wine-basic-info p span {
+  font-weight: bold;
+  color: #8b4513;
+  /* 강조 텍스트 색상 */
+}
