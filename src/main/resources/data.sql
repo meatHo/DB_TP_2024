@@ -644,3 +644,4 @@ INSERT IGNORE INTO Review (user_id, wine_id, comment, date, rating) VALUES (34, 
 INSERT IGNORE INTO Review (user_id, wine_id, comment, date, rating) VALUES (8, 38, '음식과 페어링하기 좋아요.', '2024-12-04', 4.3);
 INSERT IGNORE INTO Review (user_id, wine_id, comment, date, rating) VALUES (6, 38, '첫맛은 좋지만 끝맛이 조금 약해요.', '2024-12-09', 4.5);
 INSERT IGNORE INTO Review (user_id, wine_id, comment, date, rating) VALUES (5, 25, '와인 초보자도 쉽게 마실 수 있을 것 같아요.', '2024-11-28', 2.5);
+

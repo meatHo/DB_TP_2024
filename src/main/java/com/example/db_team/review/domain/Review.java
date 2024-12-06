@@ -41,8 +41,8 @@ public class Review {
     private LocalDate date;
 
     @Builder
-    private Review(Long reviewId, User user, Wine wine, float rating, String comment, LocalDate date) {
-        this.reviewId = reviewId;
+    private Review(User user, Wine wine, float rating, String comment, LocalDate date) {
+        //this.reviewId = reviewId;
         this.user = user;
         this.wine = wine;
         this.rating = rating;

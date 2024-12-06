@@ -42,6 +42,13 @@ public class ReviewService {
     }
 
     public WineReviewResponse createReview(Long wineId, WineReviewRequest request, HttpSession session) {
+        // Request 내용 확인
+        System.out.println("Received WineReviewRequest: " + request);
+
+        // 개별 필드 출력
+        System.out.println("Rating: " + request.rating());
+        System.out.println("Comment: " + request.comment());
+
         Object userIdFromSession = session.getAttribute("userId");
         System.out.println("Session userId: " + userIdFromSession);
 
@@ -61,19 +68,27 @@ public class ReviewService {
         }
 
         Review review = getReview(request, user, wine);
+        System.out.println("2: " + request.comment());
         review = reviewRepository.save(review);
+        System.out.println("3: " + request.comment());
         return WineReviewResponse.from(review);
     }
 
 
     private static Review getReview(WineReviewRequest request, User user, Wine wine) {
+        // Log 확인용 출력
+        System.out.println("asdfadsfasdf: " + request.rating());
+        System.out.println("Comment: " + request.comment());
+
+        // Review 생성
         Review review = Review.builder()
                 .user(user)
                 .wine(wine)
                 .rating(request.rating())
                 .comment(request.comment())
-                .date(LocalDate.now())
+                .date(LocalDate.now()) // 요청의 date 대신 현재 날짜를 사용
                 .build();
+        System.out.println("1: " + request.comment());
         return review;
     }
 }
