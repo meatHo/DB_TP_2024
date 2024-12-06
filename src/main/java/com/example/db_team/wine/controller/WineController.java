@@ -1,5 +1,7 @@
 package com.example.db_team.wine.controller;
 
+import com.example.db_team.review.domain.ReviewRepository;
+import com.example.db_team.wine.WineResponse;
 import com.example.db_team.wine.entity.Wine;
 import com.example.db_team.wine.service.WineService;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class WineController {
 
     private final WineService wineService;
+    private final ReviewRepository reviewRepository;
 
     @GetMapping
     public ResponseEntity<List<Wine>> getWineList(@RequestParam Map<String, String> params) {
@@ -27,7 +30,7 @@ public class WineController {
     }
 
     @GetMapping("/{engName}")
-    public ResponseEntity<Wine> getWine(@PathVariable("engName") String engName) {
+    public ResponseEntity<WineResponse> getWine(@PathVariable("engName") String engName) {
         try {
             // URL 디코딩 처리
             String decodedEngName = URLDecoder.decode(engName, StandardCharsets.UTF_8.name());
@@ -37,9 +40,13 @@ public class WineController {
             Wine wine = wineService.getWineByEngName(decodedEngName);
             if (wine == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }else{
+                Double rating = reviewRepository.findAverageRating(wine.getWineId());
+                Double average = Double.valueOf(String.format("%.2f", rating));
+                WineResponse response = new WineResponse(wine, average);
+                return ResponseEntity.status(HttpStatus.OK).body(response);
             }
 
-            return ResponseEntity.status(HttpStatus.OK).body(wine);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);

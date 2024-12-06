@@ -14,6 +14,7 @@ const WineInfo = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 추가
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
   const navigate = useNavigate();
+  const [average, setAverage] = useState(null); // 평균 평점
 
   const fetchWineDetails = async () => {
     setIsLoading(true);
@@ -22,7 +23,10 @@ const WineInfo = () => {
     try {
       const response = await axios.get(`http://localhost:8080/api/wines/${decodedEngName}`);
       console.log("Wine details response:", response.data); // 응답 데이터 출력
-      setWineDetails(response.data);
+      // 데이터 분리 및 상태에 저장
+      const { wine, average } = response.data;
+      setWineDetails(wine);
+      setAverage(average);
     } catch (error) {
       console.error('와인 상세 정보 요청 실패:', error);
       setWineDetails(mockWineDetails); // 테스트 데이터를 기본 값으로 사용
@@ -124,7 +128,7 @@ const WineInfo = () => {
         <div className="wine-basic-info">
           <p>{wineDetails.korName}</p>
           <p><strong>와인 종류:</strong> {wineDetails.type}</p>
-          <p><strong>평점:</strong> {wineDetails.rating} / 5</p>
+          <p><strong>평점:</strong> {average} / 5</p>
           <p><strong>가격:</strong> {wineDetails.price.toLocaleString()} 원</p>
         </div>
       </div>
