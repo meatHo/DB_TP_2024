@@ -79,7 +79,7 @@ const TopBar = () => {
           // 서버가 응답했지만 상태 코드가 2xx가 아닌 경우
           console.error('로그인 상태 확인 실패 상태: ', error.response.status);
           console.error('로그인 상태 확인 실패 응답 데이터: ', error.response.data);
-          alert('로그인 상태를 확인하는 데 실패했습니다. 다시 시도해 주세요.');
+          //alert('로그인 상태를 확인하는 데 실패했습니다. 다시 시도해 주세요.');
         } else if (error.request) {
           // 서버에 요청했지만 응답이 없는 경우 (네트워크 문제)
           console.error('서버 응답 없음: ', error.request);
