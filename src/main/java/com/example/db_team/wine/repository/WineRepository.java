@@ -13,4 +13,6 @@ public interface WineRepository extends JpaRepository<Wine, Long>, JpaSpecificat
     Optional<List<Wine>> findByProducer(Producer producer);
 
     Optional<Wine> findByEngName(String engName);
+
+    Optional<Wine> findById(Long wineId);
 }

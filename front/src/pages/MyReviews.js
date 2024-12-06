@@ -16,7 +16,14 @@ const MyReviews = () => {
                 });
 
                 if (response.status === 200) {
-                    setReviews(response.data); // 리뷰 데이터 저장
+                    const reviewsWithWineData = await Promise.all(
+                        response.data.map(async (review) => {
+                            // 리뷰 데이터에서 wineId로 와인 데이터를 추가 요청
+                            const wineResponse = await axios.get(`http://localhost:8080/api/wines/${review.wineId}`);
+                            return { ...review, wine: wineResponse.data }; // 리뷰 데이터에 와인 데이터 추가
+                        })
+                    );
+                    setReviews(reviewsWithWineData); // 리뷰와 와인 데이터를 포함한 결과 저장
                 } else if (response.status === 401) {
                     alert('로그인이 필요합니다.');
                     navigate('/login'); // 로그인 페이지로 리다이렉트
@@ -27,20 +34,16 @@ const MyReviews = () => {
                 }
             } catch (error) {
                 if (error.response) {
-                    // 서버가 응답했지만 상태 코드가 2xx가 아닌 경우
                     console.error('리뷰 데이터 요청 실패 상태: ', error.response.status);
                     console.error('리뷰 데이터 요청 실패 응답 데이터: ', error.response.data);
                     alert('리뷰 데이터를 불러오는 데 실패했습니다. 다시 시도해 주세요.');
                 } else if (error.request) {
-                    // 서버에 요청했지만 응답이 없는 경우 (네트워크 문제)
                     console.error('서버 응답 없음: ', error.request);
                     alert('서버와의 연결에 문제가 발생했습니다. 네트워크를 확인하고 다시 시도해 주세요.');
                 } else {
-                    // 기타 에러 (코드 오류 등)
                     console.error('리뷰 데이터 요청 중 에러: ', error.message);
                     alert('알 수 없는 문제가 발생했습니다. 다시 시도해 주세요.');
                 }
-                // 에러 발생 시 홈으로 이동
                 navigate('/');
             } finally {
                 setLoading(false);
@@ -49,43 +52,6 @@ const MyReviews = () => {
 
         fetchReviews();
     }, [navigate]);
-
-    // 테스트 코드
-    /* useEffect(() => {
-        // Mock 데이터 로드
-        const mockReviews = [
-            {
-                loginId: 1,
-                korName: '샤르도네',
-                engName: 'Chardonnay',
-                rating: 5,
-                date: '2024-11-20',
-                content: '완벽한 와인이었습니다. 부드럽고 우아했어요.',
-            },
-            {
-                loginId: 2,
-                korName: '메를로',
-                engName: 'Merlot',
-                rating: 4,
-                date: '2024-11-18',
-                content: '부드럽고 매력적이었습니다. 약간 달콤한 향이 좋았습니다.',
-            },
-            {
-                loginId: 3,
-                korName: '카베르네 소비뇽',
-                engName: 'Cabernet Sauvignon',
-                rating: 4.5,
-                date: '2024-11-19',
-                content: '풍부한 맛이 인상적이었습니다. 과일 향이 훌륭했어요.',
-            },
-        ];
-    
-        // 로딩 시뮬레이션
-        setTimeout(() => {
-            setReviews(mockReviews); // Mock 데이터를 상태로 설정
-            setLoading(false); // 로딩 상태 종료
-        }, 1000); // 로딩 상태를 확인하기 위해 1초 지연
-    }, []); */
 
     if (loading) {
         return <LoadingMessage>로딩 중...</LoadingMessage>;
@@ -100,16 +66,15 @@ const MyReviews = () => {
             <Title>내가 작성한 리뷰</Title>
             <ReviewsContainer>
                 {reviews.map((review) => (
-                    <ReviewCard key={review.loginId}>
+                    <ReviewCard key={review.id}>
                         <WineName>
-                            {review.engName}
-                            <WineEnglishName>{review.korName}</WineEnglishName>
+                            {review.wine.engName} ({review.wine.korName})
                         </WineName>
                         <ReviewDetails>
                             <Rating>평점: {review.rating} / 5</Rating>
                             <Date>{review.date}</Date>
                         </ReviewDetails>
-                        <ReviewContent>{review.content}</ReviewContent>
+                        <ReviewContent>{review.comment}</ReviewContent>
                     </ReviewCard>
                 ))}
             </ReviewsContainer>

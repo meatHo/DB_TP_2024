@@ -83,7 +83,9 @@ const WineInfo = () => {
 
     try {
       console.log("Request newreview:", newReview); // 요청 데이터 확인
-      const response = await axios.post(`http://localhost:8080/api/reviews/${wineDetails.wineId}`, newReview);
+      const response = await axios.post(`http://localhost:8080/api/reviews/${wineDetails.wineId}`, newReview, {
+        withCredentials: true,
+      });
       console.log("review Data:", response.data); // 응답 데이터 확인
       setReviews([...reviews, response.data]); // 새 리뷰 추가
       setNewReview({ rating: '', comment: '' }); // 폼 초기화

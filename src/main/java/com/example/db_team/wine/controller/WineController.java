@@ -46,6 +46,24 @@ public class WineController {
         }
     }
 
+    @GetMapping("/{wineId}")
+    public ResponseEntity<Wine> getWineById(@PathVariable("wineId") Long wineId) {
+        try {
+            System.out.println("Received wineId: " + wineId); // 디버깅용 로그
+
+            // 서비스에서 와인 데이터 가져오기
+            Wine wine = wineService.getWineById(wineId);
+            if (wine == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+            }
+
+            return ResponseEntity.status(HttpStatus.OK).body(wine);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
     @PostMapping("/init-wines")
     public String initializeWines() {
 

@@ -89,3 +89,7 @@ public class WineService {
         wineRepository.saveAll(wines);
     }
 }
+public Wine getWineById(Long wineId) {
+    return wineRepository.findById(wineId)
+            .orElseThrow(() -> new RuntimeException("Wine with ID [" + wineId + "] not exist"));
+}

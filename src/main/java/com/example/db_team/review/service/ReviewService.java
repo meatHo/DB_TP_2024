@@ -41,12 +41,16 @@ public class ReviewService {
     }
 
     public WineReviewResponse createReview(Long wineId, WineReviewRequest request, HttpSession session) {
-        Long userId = (Long) session.getAttribute("userId");
-        if (userId == null) {
+        Object userIdFromSession = session.getAttribute("userId");
+        System.out.println("Session userId: " + userIdFromSession);
+
+        if (userIdFromSession == null) {
             throw new IllegalStateException("User is not logged in.");
         }
 
-        User user = userRepository.findById(request.userId())
+        Long userId = (Long) userIdFromSession;
+
+        User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         Wine wine = wineRepository.findById(wineId)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid wine ID"));
