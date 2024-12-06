@@ -16,14 +16,7 @@ const MyReviews = () => {
                 });
 
                 if (response.status === 200) {
-                    const reviewsWithWineData = await Promise.all(
-                        response.data.map(async (review) => {
-                            // 리뷰 데이터에서 wineId로 와인 데이터를 추가 요청
-                            const wineResponse = await axios.get(`http://localhost:8080/api/wines/id/${review.wineId}`);
-                            return { ...review, wine: wineResponse.data }; // 리뷰 데이터에 와인 데이터 추가
-                        })
-                    );
-                    setReviews(reviewsWithWineData); // 리뷰와 와인 데이터를 포함한 결과 저장
+                    setReviews(response.data); // 리뷰 데이터 저장
                 } else if (response.status === 401) {
                     alert('로그인이 필요합니다.');
                     navigate('/login'); // 로그인 페이지로 리다이렉트
@@ -32,7 +25,8 @@ const MyReviews = () => {
                     alert('리뷰 데이터를 가져오지 못했습니다.');
                     navigate('/');
                 }
-            } catch (error) {
+            }
+            catch (error) {
                 if (error.response) {
                     console.error('리뷰 데이터 요청 실패 상태: ', error.response.status);
                     console.error('리뷰 데이터 요청 실패 응답 데이터: ', error.response.data);
@@ -57,7 +51,7 @@ const MyReviews = () => {
         return <LoadingMessage>로딩 중...</LoadingMessage>;
     }
 
-    if (reviews.length === 0) {
+    if (!reviews || reviews.length === 0) {
         return <NoReviewsMessage>작성한 리뷰가 없습니다.</NoReviewsMessage>;
     }
 
