@@ -6,7 +6,8 @@ import wineImage from '../assets/wine.svg';
 import styled from 'styled-components';
 
 const WineInfo = () => {
-  const { wineName } = useParams(); // URL에서 와인 이름을 가져옴
+  const { eng_name } = useParams(); // URL에서 와인 이름 가져옴
+  const decodedEngName = decodeURIComponent(eng_name); // 공백 처리
   const [wineDetails, setWineDetails] = useState(null); // 와인 상세 정보
   const [reviews, setReviews] = useState([]); // 리뷰 목록
   const [newReview, setNewReview] = useState({ score: '', comment: '' }); // 새 리뷰 입력 상태
@@ -16,8 +17,11 @@ const WineInfo = () => {
 
   const fetchWineDetails = async () => {
     setIsLoading(true);
+    console.log("eng_name from URL:", eng_name);
+    console.log("Decoded eng_name:", decodedEngName);
     try {
-      const response = await axios.get(`http://localhost:8080/api/wine/${wineName}`);
+      const response = await axios.get(`http://localhost:8080/api/wines/${decodedEngName}`);
+      console.log("Wine details response:", response.data); // 응답 데이터 출력
       setWineDetails(response.data);
     } catch (error) {
       console.error('와인 상세 정보 요청 실패:', error);
@@ -29,7 +33,7 @@ const WineInfo = () => {
 
   const fetchReviews = async () => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/reviews/${wineName}`);
+      const response = await axios.get(`http://localhost:8080/api/reviews/${wineDetails.wineId}`);
       setReviews(response.data);
     } catch (error) {
       console.error('리뷰 데이터 요청 실패:', error);
@@ -73,7 +77,7 @@ const WineInfo = () => {
     }
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/reviews/${wineName}`, newReview);
+      const response = await axios.post(`http://localhost:8080/api/reviews/${decodedEngName}`, newReview);
       setReviews([...reviews, response.data]); // 새 리뷰 추가
       setNewReview({ score: '', comment: '' }); // 폼 초기화
     } catch (error) {
@@ -86,7 +90,7 @@ const WineInfo = () => {
     checkLoginStatus();
     fetchWineDetails();
     fetchReviews();
-  }, [wineName]);
+  }, [decodedEngName]);
 
   if (isLoading) {
     return <div className="loading-message">로딩 중...</div>;
@@ -98,13 +102,13 @@ const WineInfo = () => {
 
   return (
     <div className="wine-info-container">
-      <h1>{wineDetails.eng_name}</h1>
+      <h1>{wineDetails.engName}</h1>
       <div className="wine-header">
         <div className="wine-image">
           <WineImage src={wineImage} alt="와인 이미지" />
         </div>
         <div className="wine-basic-info">
-          <p>{wineDetails.kor_name}</p>
+          <p>{wineDetails.korName}</p>
           <p><strong>와인 종류:</strong> {wineDetails.type}</p>
           <p><strong>평점:</strong> {wineDetails.rating} / 5</p>
           <p><strong>가격:</strong> {wineDetails.price.toLocaleString()} 원</p>
@@ -113,10 +117,10 @@ const WineInfo = () => {
 
       <div className="wine-details">
         <h2>상세 정보</h2>
-        <p><strong>생산국가:</strong> {wineDetails.origin} / {wineDetails.region}</p>
-        <p><strong>생산지역:</strong> {wineDetails.region}</p>
-        <p><strong>포도 품종:</strong> {wineDetails.grapeName}</p>
-        <p><strong>도수:</strong> {wineDetails.alcohol_content ? `${wineDetails.alcohol_content}%` : '정보 없음'}</p>
+        <p><strong>생산국가:</strong> {wineDetails.producer.origin}</p>
+        <p><strong>생산지역:</strong> {wineDetails.producer.region}</p>
+        <p><strong>포도 품종:</strong> {wineDetails.grape.grapeName}</p>
+        <p><strong>도수:</strong> {wineDetails.alcoholContent ? `${wineDetails.alcoholContent}%` : '정보 없음'}</p>
         <p><strong>향:</strong> {wineDetails.aroma || '정보 없음'}</p>
         <p><strong>당도:</strong> {wineDetails.sweetness || '정보 없음'}</p>
         <p><strong>산도:</strong> {wineDetails.acidity || '정보 없음'}</p>
@@ -131,13 +135,13 @@ const WineInfo = () => {
       </div>
 
       <div className='grape-name'>
-        <h3>품종 : {wineDetails.grapeName}</h3>
-        <p>{wineDetails.grapeEx}</p>
+        <h3>품종 : {wineDetails.grape.grapeName}</h3>
+        <p>{wineDetails.grape.grapeEx}</p>
       </div>
 
       <div className='region-name'>
-        <h3>지역 : {wineDetails.region}</h3>
-        <p>{wineDetails.regionEx}</p>
+        <h3>지역 : {wineDetails.producer.region}</h3>
+        <p>{wineDetails.producer.regionEx}</p>
       </div>
 
 

@@ -230,7 +230,7 @@ const SearchResult = () => {
             <ResultContent>
               {/*WineTitle 클릭하면 상세페이지(WineInfo 실행)로 이동*/}
               <WineTitle
-                onClick={() => navigate(`/wines/${result.engName}`)}
+                onClick={() => navigate(`/wines/${encodeURIComponent(result.engName)}`)}
                 role="button"
               >
                 {result.engName}
