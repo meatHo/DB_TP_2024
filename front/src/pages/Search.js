@@ -239,7 +239,6 @@ const SearchResult = () => {
               <WineInfo>
                 <WineType type={result.type}>{result.type}</WineType> {/* 와인 종류에 따라 색상 변경 */}
                 <Country>{result.origin}</Country>
-                <Rating>⭐ {result.rating}</Rating>
               </WineInfo>
             </ResultContent>
           </ResultCard>
