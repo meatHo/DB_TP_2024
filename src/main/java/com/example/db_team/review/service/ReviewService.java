@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public class ReviewService {
                 .wine(wine)
                 .rating(request.rating())
                 .comment(request.comment())
-                .date(request.date())
+                .date(LocalDate.now())
                 .build();
         return review;
     }
