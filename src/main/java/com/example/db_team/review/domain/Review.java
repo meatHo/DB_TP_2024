@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Table(uniqueConstraints = {
         @UniqueConstraint(columnNames = {"user_id", "wine_id"})
 })
-//@Check(constraints = "date REGEXP '^\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2}:\\d{2}$'")
+//@Check(constraints = "date REGEXP '^\\d{4}-\\d{2}-\\d{2}$'")
 public class Review {
 
     @Id
