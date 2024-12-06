@@ -10,7 +10,7 @@ const WineInfo = () => {
   const decodedEngName = decodeURIComponent(eng_name); // 공백 처리
   const [wineDetails, setWineDetails] = useState(null); // 와인 상세 정보
   const [reviews, setReviews] = useState([]); // 리뷰 목록
-  const [newReview, setNewReview] = useState({ score: '', comment: '' }); // 새 리뷰 입력 상태
+  const [newReview, setNewReview] = useState({ wineId: '', rating: '', comment: '' }); // 새 리뷰 입력 상태
   const [isLoggedIn, setIsLoggedIn] = useState(false); // 로그인 상태 추가
   const [isLoading, setIsLoading] = useState(true); // 로딩 상태
   const navigate = useNavigate();
@@ -34,6 +34,7 @@ const WineInfo = () => {
   const fetchReviews = async () => {
     try {
       const response = await axios.get(`http://localhost:8080/api/reviews/${wineDetails.wineId}`);
+      console.log("Wine details response:", response.data); // 응답 데이터 출력
       setReviews(response.data);
     } catch (error) {
       console.error('리뷰 데이터 요청 실패:', error);
@@ -54,8 +55,12 @@ const WineInfo = () => {
   };
 
   const handleReviewChange = (e) => {
-    const { name, value } = e.target;
-    setNewReview({ ...newReview, [name]: value });
+    const { wineId, name, value } = e.target;
+    setNewReview({
+      ...newReview,
+      [name]: value,
+      wineId: wineDetails.wineId, // wineId 추가
+    });
   };
 
   const handleReviewSubmit = async (e) => {
@@ -66,22 +71,24 @@ const WineInfo = () => {
       return;
     }
 
-    if (!newReview.score || !newReview.comment) {
+    if (!newReview.rating || !newReview.comment) {
       alert('점수와 코멘트를 입력해주세요.');
       return;
     }
 
-    if (newReview.score < 1 || newReview.score > 5) {
+    if (newReview.rating < 1 || newReview.rating > 5) {
       alert('점수는 1~5 사이의 값이어야 합니다.');
       return;
     }
 
     try {
-      const response = await axios.post(`http://localhost:8080/api/reviews/${decodedEngName}`, newReview);
+      console.log("Request newreview:", newReview); // 요청 데이터 확인
+      const response = await axios.post(`http://localhost:8080/api/reviews/${wineDetails.wineId}`, newReview);
+      console.log("review Data:", response.data); // 응답 데이터 확인
       setReviews([...reviews, response.data]); // 새 리뷰 추가
-      setNewReview({ score: '', comment: '' }); // 폼 초기화
+      setNewReview({ rating: '', comment: '' }); // 폼 초기화
     } catch (error) {
-      console.error('리뷰 전송 중 오류 발생:', error);
+      console.error('리뷰 전송 중 오류 발생:', error.response?.data || error.message);
       alert('리뷰 전송에 실패했습니다.');
     }
   };
@@ -89,8 +96,13 @@ const WineInfo = () => {
   useEffect(() => {
     checkLoginStatus();
     fetchWineDetails();
-    fetchReviews();
   }, [decodedEngName]);
+
+  useEffect(() => {
+    if (wineDetails && wineDetails.wineId) {
+      fetchReviews();
+    }
+  }, [wineDetails]); // wineDetails가 변경될 때 fetchReviews 실행
 
   if (isLoading) {
     return <div className="loading-message">로딩 중...</div>;
@@ -150,7 +162,7 @@ const WineInfo = () => {
         {reviews.length > 0 ? (
           reviews.map((review, index) => (
             <div key={index} className="review-card">
-              <p><strong>{review.user}</strong> - {review.date}</p>
+              <p><strong>{review.userName}</strong> - {review.date}</p>
               <p>평점: {review.rating} / 5</p>
               <p>{review.comment}</p>
             </div>
@@ -166,8 +178,8 @@ const WineInfo = () => {
           <label>점수 (1~5):</label>
           <input
             type="number"
-            name="score"
-            value={newReview.score}
+            name="rating"
+            value={newReview.rating}
             onChange={handleReviewChange}
             min="1"
             max="5"
