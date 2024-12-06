@@ -8,6 +8,7 @@ import com.example.db_team.user.domain.User;
 import com.example.db_team.user.domain.UserRepository;
 import com.example.db_team.wine.entity.Wine;
 import com.example.db_team.wine.repository.WineRepository;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -39,7 +40,12 @@ public class ReviewService {
         return responseList;
     }
 
-    public WineReviewResponse createReview(Long wineId, WineReviewRequest request) {
+    public WineReviewResponse createReview(Long wineId, WineReviewRequest request, HttpSession session) {
+        Long userId = (Long) session.getAttribute("userId");
+        if (userId == null) {
+            throw new IllegalStateException("User is not logged in.");
+        }
+
         User user = userRepository.findById(request.userId())
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user ID"));
         Wine wine = wineRepository.findById(wineId)
@@ -48,10 +54,12 @@ public class ReviewService {
         if (reviewRepository.existsByUserAndWine(user, wine)) {
             throw new IllegalStateException("Review already exists!");
         }
+
         Review review = getReview(request, user, wine);
         review = reviewRepository.save(review);
         return WineReviewResponse.from(review);
     }
+
 
     private static Review getReview(WineReviewRequest request, User user, Wine wine) {
         Review review = Review.builder()

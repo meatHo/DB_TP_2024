@@ -37,7 +37,7 @@ public class ReviewController {
     }
 
     @PostMapping("/{wineId}")
-    public WineReviewResponse createReview(@PathVariable Long wineId, @RequestBody WineReviewRequest request) {
-        return reviewService.createReview(wineId, request);
+    public WineReviewResponse createReview(@PathVariable Long wineId, @RequestBody WineReviewRequest request, HttpSession session) {
+        return reviewService.createReview(wineId, request, session);
     }
 }
