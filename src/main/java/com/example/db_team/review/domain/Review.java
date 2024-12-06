@@ -4,7 +4,8 @@ import com.example.db_team.user.domain.User;
 import com.example.db_team.wine.entity.Wine;
 import jakarta.persistence.*;
 import lombok.*;
-import org.hibernate.annotations.Check;
+
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -37,10 +38,10 @@ public class Review {
     @Column(name = "comment")
     private String comment;
     @Column(name = "date")
-    private String date;
+    private LocalDate date;
 
     @Builder
-    private Review(Long reviewId, User user, Wine wine, float rating, String comment, String date) {
+    private Review(Long reviewId, User user, Wine wine, float rating, String comment, LocalDate date) {
         this.reviewId = reviewId;
         this.user = user;
         this.wine = wine;
