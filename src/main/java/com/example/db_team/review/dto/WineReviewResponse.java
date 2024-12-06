@@ -4,6 +4,8 @@ import com.example.db_team.review.domain.Review;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;
 
+import java.time.LocalDate;
+
 @Builder
 public record WineReviewResponse(
         @Schema(description = "리뷰 아이디", example = "testId")
@@ -28,7 +30,7 @@ public record WineReviewResponse(
         String comment,
 
         @Schema(description = "리뷰 작성 날짜", example = "2024-05-20")
-        String date
+        LocalDate date
 ) {
 
         public static WineReviewResponse from(Review review) {
