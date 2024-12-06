@@ -19,7 +19,7 @@ const MyReviews = () => {
                     const reviewsWithWineData = await Promise.all(
                         response.data.map(async (review) => {
                             // 리뷰 데이터에서 wineId로 와인 데이터를 추가 요청
-                            const wineResponse = await axios.get(`http://localhost:8080/api/wines/${review.wineId}`);
+                            const wineResponse = await axios.get(`http://localhost:8080/api/wines/id/${review.wineId}`);
                             return { ...review, wine: wineResponse.data }; // 리뷰 데이터에 와인 데이터 추가
                         })
                     );

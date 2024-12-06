@@ -46,7 +46,7 @@ public class WineController {
         }
     }
 
-    @GetMapping("/{wineId}")
+    @GetMapping("/id/{wineId}")
     public ResponseEntity<Wine> getWineById(@PathVariable("wineId") Long wineId) {
         try {
             System.out.println("Received wineId: " + wineId); // 디버깅용 로그
