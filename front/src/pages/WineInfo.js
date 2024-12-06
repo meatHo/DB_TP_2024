@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import './WineInfo.css';
+import wineImage from '../assets/wine.svg';
+import styled from 'styled-components';
 
 const WineInfo = () => {
   const { wineName } = useParams(); // URL에서 와인 이름을 가져옴
@@ -99,7 +101,7 @@ const WineInfo = () => {
       <h1>{wineDetails.eng_name}</h1>
       <div className="wine-header">
         <div className="wine-image">
-          <img src={wineDetails.image || '../assets/wine.svg'} alt={`${wineDetails.eng_name}`} />
+          <WineImage src={wineImage} alt="와인 이미지" />
         </div>
         <div className="wine-basic-info">
           <p>{wineDetails.kor_name}</p>
@@ -111,13 +113,33 @@ const WineInfo = () => {
 
       <div className="wine-details">
         <h2>상세 정보</h2>
-        <p><strong>생산지:</strong> {wineDetails.country} / {wineDetails.region}</p>
-        <p><strong>와이너리:</strong> {wineDetails.winery}</p>
+        <p><strong>생산국가:</strong> {wineDetails.origin} / {wineDetails.region}</p>
+        <p><strong>생산지역:</strong> {wineDetails.region}</p>
         <p><strong>포도 품종:</strong> {wineDetails.grapeName}</p>
         <p><strong>도수:</strong> {wineDetails.alcohol_content ? `${wineDetails.alcohol_content}%` : '정보 없음'}</p>
-        <p><strong>페어링 음식:</strong> {wineDetails.pairing || '정보 없음'}</p>
         <p><strong>향:</strong> {wineDetails.aroma || '정보 없음'}</p>
+        <p><strong>당도:</strong> {wineDetails.sweetness || '정보 없음'}</p>
+        <p><strong>산도:</strong> {wineDetails.acidity || '정보 없음'}</p>
+        <p><strong>타닌:</strong> {wineDetails.tanin || '정보 없음'}</p>
+        <p><strong>바디:</strong> {wineDetails.body || '정보 없음'}</p>
+        <p><strong>빈티지:</strong> {wineDetails.vintage ? `${wineDetails.vintage}년` : "빈티지 정보 없음"}</p>
+        <p><strong>페어링 음식:</strong> {wineDetails.pairing || '정보 없음'}</p>
       </div>
+
+      <div className='wine-dic'>
+        <h2>와인 사전</h2>
+      </div>
+
+      <div className='grape-name'>
+        <h3>품종 : {wineDetails.grapeName}</h3>
+        <p>{wineDetails.grapeEx}</p>
+      </div>
+
+      <div className='region-name'>
+        <h3>지역 : {wineDetails.region}</h3>
+        <p>{wineDetails.regionEx}</p>
+      </div>
+
 
       <div className="reviews">
         <h2>리뷰</h2>
@@ -169,16 +191,17 @@ const mockWineDetails = {
   eng_name: 'Chateau Margaux',
   kor_name: '샤토 마고',
   type: 'Red',
-  country: 'France',
+  origin: 'France',
   region: 'Bordeaux',
-  winery: 'Chateau Margaux Winery',
+  regionEx: '베리베리굿',
   grapeName: 'Cabernet Sauvignon',
+  grapeEx: '포도 맛있당',
   rating: 4.8,
   price: 500000,
   pairing: '스테이크, 치즈',
   aroma: '블랙베리, 바닐라',
   alcohol_content: 13.5,
-  image: '/chateau-margaux.jpg',
+  image: '../assets/wine.svg',
   reviews: [
     {
       id: 1,
@@ -196,3 +219,11 @@ const mockWineDetails = {
     },
   ],
 };
+
+const WineImage = styled.img`
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
+  margin-right: 20px;
+  object-fit: cover;
+`;

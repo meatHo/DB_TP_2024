@@ -20,7 +20,7 @@ body {
   font-size: 2.2em;
   color: #8b0000;
   margin-bottom: 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .wine-info-container h2 {
@@ -32,10 +32,11 @@ body {
 }
 
 .wine-info-container p {
-  font-size: 1em;
+  font-size: 1.2em;
   color: #0f0f0f !important;
   line-height: 1.6;
   margin-bottom: 8px;
+
 }
 
 .wine-info-container p strong {
@@ -111,10 +112,6 @@ form button:hover {
   color: #999;
 }
 
-.wine-info-container p:nth-child(7) {
-  color: #b22222;
-  font-weight: bold;
-}
 
 @media (max-width: 768px) {
   .wine-info-container {
@@ -132,6 +129,19 @@ form button:hover {
 }
 
 .wine-details {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.grape-name {
+  margin-top: 20px;
+}
+
+.region-name {
+  margin-top: 20px;
+}
+
+.wine-dic {
   margin-top: 20px;
 }
 
@@ -183,7 +193,7 @@ form button:hover {
   display: flex;
   flex-wrap: wrap;
   /* 작은 화면에서도 잘 정렬되도록 설정 */
-  align-items: center;
+  align-items: left;
   /* 수직 가운데 정렬 */
   justify-content: space-between;
   /* 양쪽 끝으로 정렬 */
@@ -197,15 +207,6 @@ form button:hover {
   /* 하단 경계선 추가 */
 }
 
-.wine-image img {
-  width: 200px;
-  /* 이미지 크기 설정 */
-  height: auto;
-  border-radius: 8px;
-  /* 이미지 둥근 모서리 */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  /* 이미지 그림자 */
-}
 
 .wine-basic-info {
   flex: 1;
@@ -229,7 +230,7 @@ form button:hover {
 }
 
 .wine-basic-info p span {
-  font-weight: bold;
+  font-weight: normal;
   color: #8b4513;
   /* 강조 텍스트 색상 */
 }
