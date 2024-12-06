@@ -28,13 +28,13 @@ public class WineService {
         log.info(params.toString());
 
         Grape grape = grapeRepository.findByGrapeName(params.get("grapeName"))
-                        .orElse(null);
+                .orElse(null);
 
         List<Wine> wineList = new ArrayList<Wine>(wineRepository.findAll(
                 Specification.where(WineSpecifications.hasQ(params.get("q")))
                         .and(WineSpecifications.hasType(params.get("type")))
                         .and(WineSpecifications.hasGrape(grape))
-            )
+        )
         );
 
         log.info("wine 테이블 검색: {}", wineList.toString());
@@ -46,20 +46,20 @@ public class WineService {
         log.info("producer 테이블/지역 검색: {}", wineList.toString());
 
         producerRepository.findByOrigin(params.get("origin"))
-            .filter(producers -> !producers.isEmpty())
-            .ifPresent(producers -> {
-                        log.info("빈문자열 producer가 존재함");
-                        List<Wine> tempList = new ArrayList<>();
-                        producers.forEach(producer -> {
-                                tempList.addAll(wineRepository.findByProducer(producer)
-                                                    .orElse(Collections.emptyList()));
-                                log.info("producer 테이블/나라 검색: {}", wineRepository.findByProducer(producer).toString());
-                                log.info(tempList.toString());
-                            }
-                        );
-                        wineList.retainAll(tempList);
-                    }
-            );
+                .filter(producers -> !producers.isEmpty())
+                .ifPresent(producers -> {
+                            log.info("빈문자열 producer가 존재함");
+                            List<Wine> tempList = new ArrayList<>();
+                            producers.forEach(producer -> {
+                                        tempList.addAll(wineRepository.findByProducer(producer)
+                                                .orElse(Collections.emptyList()));
+                                        log.info("producer 테이블/나라 검색: {}", wineRepository.findByProducer(producer).toString());
+                                        log.info(tempList.toString());
+                                    }
+                            );
+                            wineList.retainAll(tempList);
+                        }
+                );
 
         log.info(producerRepository.findByOrigin(params.get("origin")).toString());
 
@@ -88,8 +88,9 @@ public class WineService {
 
         wineRepository.saveAll(wines);
     }
-}
-public Wine getWineById(Long wineId) {
-    return wineRepository.findById(wineId)
-            .orElseThrow(() -> new RuntimeException("Wine with ID [" + wineId + "] not exist"));
+
+    public Wine getWineById(Long wineId) {
+        return wineRepository.findById(wineId)
+                .orElseThrow(() -> new RuntimeException("Wine with ID [" + wineId + "] not exist"));
+    }
 }
